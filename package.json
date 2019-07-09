@@ -1,0 +1,12 @@
+{
+  "name": "@eirikb/stfu",
+  "private": true,
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@eirikb/domdom": "^1.0.7",
+    "parcel": "^1.12.3"
+  }
+}
