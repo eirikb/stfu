@@ -2,16 +2,18 @@
   "name": "@eirikb/stfu",
   "private": true,
   "scripts": {
-    "start": "parcel index.html",
     "build": "parcel build index.html --no-source-maps --public-url .",
     "deploy": "gh-pages -d dist"
   },
+  "main": "server",
   "license": "MIT",
   "dependencies": {
     "@eirikb/domdom": "^1.0.7",
+    "http-proxy-middleware": "^0.19.1",
     "leaflet": "^1.5.1"
   },
   "devDependencies": {
+    "express": "4.17.1",
     "gh-pages": "2.0.1",
     "parcel": "^1.12.3"
   }
