@@ -20,45 +20,35 @@ export default ({on, set, trigger}) => {
 
   async function loadMapPoints() {
     trigger('log', 'Loading map...');
-    const fromCache = fromLocalstorage('map');
-    if (fromCache != null) {
-      trigger('log', 'Got map from cache');
-      return fromCache;
-    }
     const dom = await query('/stikkut/turer');
     const mapDataText = dom.querySelector('.routemap__container script').innerText;
     const mapDataJson = mapDataText.split(/[=\n]/)[2].replace(/;/, '');
     const mapData = JSON.parse(mapDataJson);
     trigger('log', `Loaded ${mapData.length} map points`);
-    localStorage.map = JSON.stringify(mapData);
     return mapData;
   }
 
   async function loadMyPoints() {
     trigger('log', 'Loading my points (1/2)...');
-    const fromCache = fromLocalstorage('names');
-    if (fromCache != null) {
-      trigger('log', 'Got points from cache');
-      return fromCache;
-    }
     let dom = await query('/stikkut/min-side');
     const href = dom.querySelector('.regtable__showall').getAttribute('href');
     trigger('log', 'Loading my points (2/2)...');
     dom = await query(`/stikkut/min-side${href}`);
-    const names = [...dom.querySelectorAll('.regtable__name')].map(node => {
-      const location = node.querySelector('div');
-      node.removeChild(location);
-      return {title: node.innerText.trim(), location: location.innerText.trim()}
-    });
-    trigger('log', `Got a total of ${names.length} of 'My points'`);
-    localStorage.names = JSON.stringify(names);
-    return names;
+    const dones = [...dom.querySelectorAll('[data-route]')].map(node =>
+      node.dataset.route
+    );
+    trigger('log', `Got a total of ${dones.length} of 'My points'`);
+    return dones.reduce((res, done) => {
+      res[done] = true;
+      return res;
+    }, {});
+    return dones;
   }
 
   async function start() {
-    const [map, names] = await Promise.all([loadMapPoints(), loadMyPoints()]);
+    const [map, dones] = await Promise.all([loadMapPoints(), loadMyPoints()]);
     set('map', map.reduce((res, mark) => {
-      mark.done = !!names.find(({title}) => title === mark.name);
+      mark.done = !!dones[mark.page_id];
       res[mark.id] = mark;
       return res;
     }, {}));

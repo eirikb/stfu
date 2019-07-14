@@ -73,7 +73,7 @@ const dd = domdom();
 user(dd);
 map(dd);
 
-const view = ({on, when}) => <div>
+const view = ({on, when}) => <main>
   <div class="log">
     LOG:
     {on('logs.$id', line => <div>{line}</div>)}
@@ -82,11 +82,11 @@ const view = ({on, when}) => <div>
   {when('route',
     [
       'login', () => <Login></Login>,
-      'home', () => <div>
+      'home', () => <div id="home">
       {on('map', () => <Map></Map>)}
     </div>
     ])}
-</div>;
+</main>;
 
 document.body.appendChild(dd.render(view));
 
