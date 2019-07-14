@@ -23,19 +23,12 @@ const icons = {
   done: createIcon(doneFile)
 };
 
-function gradeToIcon(grade) {
-  switch (grade) {
-    case '0':
-      return icons.green;
-    case '1':
-      return icons.blue;
-    case '2':
-      return icons.red;
-    case '3':
-      return icons.black;
-  }
-}
-
+const byGrade = {
+  '0': icons.green,
+  '1': icons.blue,
+  '2': icons.red,
+  '3': icons.black,
+};
 
 function Login({trigger, on}) {
   return <form onSubmit={e => trigger('login', e)}>
@@ -48,6 +41,7 @@ function Login({trigger, on}) {
 
 function Map({get, on}) {
   const mapElement = <div id="map"></div>;
+  // TODO: mounted support in domdom
   setTimeout(() => {
     const map = L.map(mapElement).setView([62.515, 6.1], 12);
     L.tileLayer('https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={z}&x={x}&y={y}', {
@@ -56,15 +50,15 @@ function Map({get, on}) {
 
 
     function addMark(mark) {
-      const icon = mark.done ? icons.done : gradeToIcon(mark.grade);
+      const icon = mark.done ? icons.done : byGrade[mark.grade];
       L.marker([mark.lat, mark.lon], {icon}).addTo(map)
         .bindPopup(`${mark.name}`)
     }
 
+    // TODO: ! (immediate) error in domdom
     on('+* map.$id', addMark);
     Object.values(get('map')).forEach(addMark);
-  }, 1000);
-
+  });
 
   return mapElement;
 }
@@ -74,22 +68,15 @@ user(dd);
 map(dd);
 
 const view = ({on, when}) => <main>
-  <div class="log">
-    LOG:
-    {on('logs.$id', line => <div>{line}</div>)}
-  </div>
+  {on('info', info => info)}
 
   {when('route',
     [
       'login', () => <Login></Login>,
-      'home', () => <div id="home">
-      {on('map', () => <Map></Map>)}
-    </div>
+      'home', () => <div id="home"> {on('map', () => <Map></Map>)} </div>
     ])}
 </main>;
 
 document.body.appendChild(dd.render(view));
-
-dd.on('= log', line => dd.set(`logs.${Date.now()}`, line));
 
 dd.trigger('initAuth');
