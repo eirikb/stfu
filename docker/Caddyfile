@@ -3,8 +3,8 @@ stfu.eirikb.no {
   proxy /api https://www.stikkut.no {
     without /api
   }
-  proxy /app https://www.stikkut.no
-  proxy /user https://www.stikkut.no
-  proxy /stikkut https://www.stikkut.no
-  proxy /uploads https://www.stikkut.no
+  proxy /app/ https://www.stikkut.no
+  proxy /user/ https://www.stikkut.no
+  proxy /stikkut/ https://www.stikkut.no
+  proxy /uploads/ https://www.stikkut.no
 }
