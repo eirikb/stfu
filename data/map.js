@@ -5,6 +5,14 @@ async function query(path) {
   return parser.parseFromString(data, 'text/html');
 }
 
+function fromLocalstorage(key) {
+  try {
+    return JSON.parse(localStorage[key]);
+  } catch (e) {
+    return null;
+  }
+}
+
 export default ({on, set, trigger}) => {
   on('+* route', route => {
     if (route === 'home') start();
@@ -12,16 +20,27 @@ export default ({on, set, trigger}) => {
 
   async function loadMapPoints() {
     trigger('log', 'Loading map...');
+    const fromCache = fromLocalstorage('map');
+    if (fromCache != null) {
+      trigger('log', 'Got map from cache');
+      return fromCache;
+    }
     const dom = await query('/stikkut/turer');
     const mapDataText = dom.querySelector('.routemap__container script').innerText;
     const mapDataJson = mapDataText.split(/[=\n]/)[2].replace(/;/, '');
     const mapData = JSON.parse(mapDataJson);
-    console.log(mapData);
     trigger('log', `Loaded ${mapData.length} map points`);
+    localStorage.map = JSON.stringify(mapData);
+    return mapData;
   }
 
   async function loadMyPoints() {
     trigger('log', 'Loading my points (1/2)...');
+    const fromCache = fromLocalstorage('names');
+    if (fromCache != null) {
+      trigger('log', 'Got points from cache');
+      return fromCache;
+    }
     let dom = await query('/stikkut/min-side');
     const href = dom.querySelector('.regtable__showall').getAttribute('href');
     trigger('log', 'Loading my points (2/2)...');
@@ -32,10 +51,16 @@ export default ({on, set, trigger}) => {
       return {title: node.innerText.trim(), location: location.innerText.trim()}
     });
     trigger('log', `Got a total of ${names.length} of 'My points'`);
-    console.log(names);
+    localStorage.names = JSON.stringify(names);
+    return names;
   }
 
   async function start() {
-    await Promise.all([loadMapPoints(), loadMyPoints()]);
+    const [map, names] = await Promise.all([loadMapPoints(), loadMyPoints()]);
+    set('map', map.reduce((res, mark) => {
+      mark.done = !!names.find(({title}) => title === mark.name);
+      res[mark.id] = mark;
+      return res;
+    }, {}));
   }
 };
