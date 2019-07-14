@@ -1,0 +1,10 @@
+stfu.eirikb.no {
+  proxy / https://eirikb.github.io/stfu/
+  proxy /api https://www.stikkut.no {
+    without /api
+  }
+  proxy /app https://www.stikkut.no
+  proxy /user https://www.stikkut.no
+  proxy /stikkut https://www.stikkut.no
+  proxy /uploads https://www.stikkut.no
+}
