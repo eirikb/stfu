@@ -11,3 +11,8 @@ html, body, main, #map {
 .log {
     border: 1px solid;
 }
+
+.leaflet-control-container {
+    position: absolute;
+    right: 56px;
+}

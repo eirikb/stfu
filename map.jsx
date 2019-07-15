@@ -10,19 +10,13 @@ const icons = Object.entries(iconFiles).reduce((res, [key, value]) => {
   });
   res[key] = icon;
   return res;
-},{});
+}, {});
 
-const byGrade = {
-  '0': icons.green,
-  '1': icons.blue,
-  '2': icons.red,
-  '3': icons.black,
-};
-const byGradeDone = {
-  '0': icons.green_done,
-  '1': icons.blue_done,
-  '2': icons.red_done,
-  '3': icons.black_done,
+const grade = {
+  '0': 'green',
+  '1': 'blue',
+  '2': 'red',
+  '3': 'black',
 };
 
 export default ({on, mounted}) => {
@@ -34,7 +28,9 @@ export default ({on, mounted}) => {
     }).addTo(map);
 
     on('!+* map.$id', mark => {
-      const icon = mark.done ? byGradeDone[mark.grade] : byGrade[mark.grade];
+      const color = grade[mark.grade];
+      const iconName = mark.done ? `${color}_done` : color;
+      const icon = icons[iconName];
       L.marker([mark.lat, mark.lon], {icon}).addTo(map)
         .bindPopup(`${mark.name}`)
     });
