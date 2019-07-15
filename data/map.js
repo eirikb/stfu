@@ -1,7 +1,11 @@
 const parser = new DOMParser();
 
 async function query(path) {
+  if (localStorage[path]) {
+    return parser.parseFromString(localStorage[path], 'text/html');
+  }
   const data = await fetch(path, {credentials: 'include'}).then(r => r.text());
+  localStorage[path] = data;
   return parser.parseFromString(data, 'text/html');
 }
 
