@@ -1,5 +1,7 @@
 import 'leaflet/dist/leaflet.css';
+import 'leaflet.locatecontrol/dist/L.Control.Locate.css';
 import L from 'leaflet';
+import 'leaflet.locatecontrol';
 import iconFiles from './icons/*.svg';
 
 const icons = Object.entries(iconFiles).reduce((res, [key, value]) => {
@@ -26,6 +28,8 @@ export default ({on, mounted}) => {
     L.tileLayer('https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={z}&x={x}&y={y}', {
       attribution: '<a href="http://www.kartverket.no/">Kartverket</a>'
     }).addTo(map);
+
+    L.control.locate().addTo(map);
 
     on('!+* map.$id', mark => {
       const color = grade[mark.grade];

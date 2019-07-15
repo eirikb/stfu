@@ -9,9 +9,10 @@
   "main": "server",
   "license": "MIT",
   "dependencies": {
-    "@eirikb/domdom": "file:../domdom",
+    "@eirikb/domdom": "*",
     "http-proxy-middleware": "^0.19.1",
-    "leaflet": "^1.5.1"
+    "leaflet": "^1.5.1",
+    "leaflet.locatecontrol": "^0.67.0"
   },
   "devDependencies": {
     "express": "4.17.1",
