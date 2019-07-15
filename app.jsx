@@ -30,7 +30,7 @@ const byGrade = {
   '3': icons.black,
 };
 
-function Login({trigger, on}) {
+function Login({ trigger, on }) {
   return <form onSubmit={e => trigger('login', e)}>
     <input name="username" type="email"/>
     <input name="password" type="password"/>
@@ -39,7 +39,7 @@ function Login({trigger, on}) {
   </form>
 }
 
-function Map({get, on}) {
+function Map({ get, on }) {
   const mapElement = <div id="map"></div>;
   // TODO: mounted support in domdom
   setTimeout(() => {
@@ -51,7 +51,7 @@ function Map({get, on}) {
 
     function addMark(mark) {
       const icon = mark.done ? icons.done : byGrade[mark.grade];
-      L.marker([mark.lat, mark.lon], {icon}).addTo(map)
+      L.marker([mark.lat, mark.lon], { icon }).addTo(map)
         .bindPopup(`${mark.name}`)
     }
 
@@ -67,14 +67,14 @@ const dd = domdom();
 user(dd);
 map(dd);
 
-const view = ({on, when}) => <main>
+const view = ({ on, when }) => <main>
   {on('info', info => info)}
 
   {when('route',
     [
-      'login', () => <Login></Login>,
-      'home', () => <div id="home"> {on('map', () => <Map></Map>)} </div>
+      'login', () => <Login></Login>
     ])}
+  {on('map', () => <Map></Map>)}
 </main>;
 
 document.body.appendChild(dd.render(view));
