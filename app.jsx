@@ -30,5 +30,3 @@ const view = ({on, when}) => <main>
 document.body.appendChild(dd.render(view));
 
 dd.trigger('initAuth');
-
-console.log(dd.get());

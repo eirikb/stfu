@@ -12,7 +12,6 @@ const icons = Object.entries(iconFiles).reduce((res, [key, value]) => {
   return res;
 },{});
 
-console.log(icons);
 const byGrade = {
   '0': icons.green,
   '1': icons.blue,
