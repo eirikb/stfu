@@ -15,12 +15,11 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- task: GitHubPagesPublish@1
+
+- task: AzureFileCopy@3
   inputs:
-    docPath: '$(System.DefaultWorkingDirectory)\dist\*'
-    githubusername: 'eirikb'
-    githubemail: 'eirikb@eirikb.no'
-    githubaccesstoken: '$(System.AccessToken)'
-    repositoryname: 'stfu'
-    branchname: 'gh-pages'
-    commitmessage: 'Automated Release $(Release.ReleaseId)'
+    SourcePath: 'dist'
+    azureSubscription: 'Visual Studio Enterprise – MPN(145fb177-89a7-4412-9c1f-6802580c3624)'
+    Destination: 'AzureBlob'
+    storage: 'stfueirikb'
+    ContainerName: '$web'
