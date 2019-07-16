@@ -9,7 +9,7 @@
   "main": "server",
   "license": "MIT",
   "dependencies": {
-    "@eirikb/domdom": "*",
+    "@eirikb/domdom": "1.0.8",
     "http-proxy-middleware": "^0.19.1",
     "leaflet": "^1.5.1",
     "leaflet.locatecontrol": "^0.67.0"
