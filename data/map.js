@@ -35,7 +35,7 @@ export default ({on, set}) => {
   }
 
   async function start() {
-    set('info', 'Loading map data...');
+    set('info', 'Laster kart...');
     const [map, dones] = await Promise.all([loadMapPoints(), loadMyPoints()]);
     set('info', '');
     set('map', map.reduce((res, mark) => {
