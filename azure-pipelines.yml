@@ -15,6 +15,11 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'run build'
+
 - task: CmdLine@2
   inputs:
     script: |
