@@ -1,35 +1,28 @@
 trigger:
-- master
+  - master
 
 pool:
   vmImage: 'windows-2019'
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '10.x'
+    displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+  - script: |
+      npm install
+    displayName: 'npm install and build'
 
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    customCommand: 'run build'
+  - task: Npm@1
+    inputs:
+      command: 'custom'
+      customCommand: 'run build'
 
-- task: CmdLine@2
-  inputs:
-    script: |
-      dir
-      dir dist
-
-- task: AzureFileCopy@3
-  inputs:
-    SourcePath: 'dist'
-    azureSubscription: 'Visual Studio Enterprise – MPN(145fb177-89a7-4412-9c1f-6802580c3624)'
-    Destination: 'AzureBlob'
-    storage: 'stfueirikb'
-    ContainerName: '$web'
+  - task: AzureFileCopy@3
+    inputs:
+      SourcePath: 'dist'
+      azureSubscription: 'Visual Studio Enterprise – MPN(145fb177-89a7-4412-9c1f-6802580c3624)'
+      Destination: 'AzureBlob'
+      storage: 'stfueirikb'
+      ContainerName: 'stfu'
