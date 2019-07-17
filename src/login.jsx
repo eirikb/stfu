@@ -11,6 +11,10 @@ export default function Login({trigger, on}) {
         Jeg godtar herved at innehaver av stfu.run, en stakkars kveldsprogrammerer, kan lese absolutt alt av datatrafikk
         som går mellom min fantastiske nettleser og stikkut sine nettsider via en provisorisk serverboks oppe i skya
         en eller annen plass.
+          Mange kaller dette for MITM, eller mannen i midten, som høres tildels skummelt ut, men man har ingenting
+          å frykte fordi han fyren i midten i dette tilfellet er en helt grei fyr.
+          Nesten ingenting blir logget, og ingenting lagres persistent, GDPR Compliant fra kjeller til sky.
+          Alt vel. Lev vel.
         </span>
       </label>
     </div>

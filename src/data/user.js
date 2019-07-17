@@ -1,4 +1,4 @@
-export default ({on, set, trigger}) => {
+export default ({on, set}) => {
   on('= initAuth', async () => {
     set('info', 'Logger på...');
     const authed = await fetch('/stikkut/min-side', {credentials: 'include'})
