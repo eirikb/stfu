@@ -3,6 +3,7 @@ export default ({on, set, trigger}) => {
     set('info', 'Logger på...');
     const authed = await fetch('/stikkut/min-side', {credentials: 'include'})
       .then(r => !r.url.match(/login/));
+    set('info', '');
     set('route', authed ? 'home' : 'login');
   });
 
