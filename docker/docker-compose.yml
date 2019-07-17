@@ -1,0 +1,12 @@
+version: '3'
+services:
+  stfu:
+    restart: always
+    image: "abiosoft/caddy:no-stats"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./certs:/root/.caddy
+      - ./Caddyfile:/etc/Caddyfile
+      - ./srv:/srv

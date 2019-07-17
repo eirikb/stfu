@@ -1,11 +1,10 @@
-stfu.run:80 {
-  tls off
-
-  proxy / https://stfueirikb.z16.web.core.windows.net/ {
-    header_downstream Strict-Transport-Security "max-age=31536000; includeSubDomains"
-    header_downstream X-Frame-Options SAMEORIGIN
-    header_downstream X-XSS-Protection "1; mode=block"
-    header_downstream X-Content-Type-Options nosniff
+stfu.run {
+  header / {
+    Strict-Transport-Security "max-age=31536000"
+    X-Frame-Options "DENY"
+    X-XSS-Protection "1; mode=block"
+    X-Content-Type-Options "nosniff"
+    Content-Security-Policy "default-src 'unsafe-inline' 'self'; img-src * data:"
   }
   proxy /api https://www.stikkut.no {
     without /api

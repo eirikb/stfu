@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "parcel": "^1.12.3",
-    "parcel-proxy-server": "^1.1.0"
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^0.19.1"
   }
 }
