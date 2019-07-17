@@ -1,4 +1,6 @@
-stfu.run {
+stfu.run:80 {
+  tls off
+
   proxy / https://stfueirikb.z16.web.core.windows.net/ {
     header_downstream Strict-Transport-Security "max-age=31536000; includeSubDomains"
     header_downstream X-Frame-Options SAMEORIGIN
