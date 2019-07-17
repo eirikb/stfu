@@ -1,4 +1,4 @@
-stfu.eirikb.no {
+stfu.run {
   proxy / https://stfueirikb.z16.web.core.windows.net/ {
     header_downstream Strict-Transport-Security "max-age=31536000; includeSubDomains"
     header_downstream X-Frame-Options SAMEORIGIN
