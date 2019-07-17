@@ -15,3 +15,6 @@ login:
 
 restart: 
 	docker run --rm --mount source=azureeirikb,target=/root/.azure  microsoft/azure-cli az container restart -g Stfu -n stfu
+
+logs:
+	docker run --rm --mount source=azureeirikb,target=/root/.azure  microsoft/azure-cli az container logs -g Stfu -n stfu
