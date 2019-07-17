@@ -16,7 +16,11 @@ export default ({on, set}) => {
       method: 'post',
       body: data
     }).then(r => !r.url.match(/login/));
-    set('login.failed', 'Pålogging feilet. Logg inn!');
-    set('route', authed ? 'home' : 'login');
+    if (authed) {
+      set('route', 'home' );
+    } else {
+      set('login.failed', 'Pålogging feilet. Prøv på nytt!');
+      set('info', '');
+    }
   });
 };
