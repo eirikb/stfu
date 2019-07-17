@@ -9,12 +9,12 @@
   "license": "MIT",
   "dependencies": {
     "@eirikb/domdom": "^1.0.8",
-    "http-proxy-middleware": "^0.19.1",
+    "font-awesome": "^4.7.0",
     "leaflet": "^1.5.1",
     "leaflet.locatecontrol": "^0.67.0"
   },
   "devDependencies": {
-    "express": "^4.17.1",
-    "parcel": "^1.12.3"
+    "parcel": "^1.12.3",
+    "parcel-proxy-server": "^1.1.0"
   }
 }

@@ -1,4 +1,5 @@
 import '@babel/polyfill';
+import 'font-awesome/css/font-awesome.css';
 import domdom from '@eirikb/domdom';
 import user from './data/user';
 import map from './data/map';
