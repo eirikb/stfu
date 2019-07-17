@@ -1,4 +1,4 @@
-all: build push
+all: 
 
 build:
 	docker build . -t eirikb/stfu
@@ -9,3 +9,9 @@ run:
 push:
 	docker tag eirikb/stfu eirikb.azurecr.io/stfu
 	docker push eirikb.azurecr.io/stfu
+
+login:
+	docker run --rm --mount source=azureeirikb,target=/root/.azure  microsoft/azure-cli az login
+
+restart: 
+	docker run --rm --mount source=azureeirikb,target=/root/.azure  microsoft/azure-cli az container restart -g Stfu -n stfu
