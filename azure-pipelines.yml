@@ -19,9 +19,9 @@ steps:
       command: 'custom'
       customCommand: 'run build'
 
-- task: CopyFilesOverSSH@0
-  inputs:
-    sshEndpoint: 'stfu'
-    sourceFolder: 'dist'
-    contents: '**'
-    targetFolder: 'caddy/srv'
+  - task: CopyFilesOverSSH@0
+    inputs:
+      sshEndpoint: 'stfu'
+      sourceFolder: 'dist'
+      contents: '**'
+      targetFolder: 'caddy/srv'
