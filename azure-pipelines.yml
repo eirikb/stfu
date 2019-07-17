@@ -15,9 +15,15 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
+- task: CmdLine@2
+  inputs:
+    script: |
+      dir
+      dir dist
+
 - task: AzureFileCopy@3
   inputs:
-    SourcePath: 'dist'
+    SourcePath: 'dist/*'
     azureSubscription: 'Visual Studio Enterprise – MPN(145fb177-89a7-4412-9c1f-6802580c3624)'
     Destination: 'AzureBlob'
     storage: 'stfueirikb'
