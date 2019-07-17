@@ -29,7 +29,9 @@ export default ({on, mounted}) => {
       attribution: '<a href="http://www.kartverket.no/">Kartverket</a>'
     }).addTo(map);
 
-    L.control.locate().addTo(map);
+    L.control.locate({
+      locateOptions: { enableHighAccuracy: true }
+    }).addTo(map);
 
     on('!+* map.$id', mark => {
       const color = grade[mark.grade];
