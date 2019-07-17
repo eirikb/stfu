@@ -20,3 +20,7 @@ html, body, main, #map {
 .leaflet-container .leaflet-control-attribution, .leaflet-container .leaflet-control-scale {
     font-size: 13px;
 }
+
+.the-text-with-tiny-print {
+    font-size: 10px;
+}
