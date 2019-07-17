@@ -1,5 +1,10 @@
 stfu.eirikb.no {
-  proxy / https://eirikb.github.io/stfu/
+  proxy / https://stfueirikb.z16.web.core.windows.net/ {
+    header_downstream Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    header_downstream X-Frame-Options SAMEORIGIN
+    header_downstream X-XSS-Protection "1; mode=block"
+    header_downstream X-Content-Type-Options nosniff
+  }
   proxy /api https://www.stikkut.no {
     without /api
   }
