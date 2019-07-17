@@ -2,7 +2,7 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet.locatecontrol/dist/L.Control.Locate.css';
 import L from 'leaflet';
 import 'leaflet.locatecontrol';
-import iconFiles from './icons/*.svg';
+import iconFiles from '../assets/*.svg';
 
 const icons = Object.entries(iconFiles).reduce((res, [key, value]) => {
   const icon = L.icon({
@@ -30,7 +30,7 @@ export default ({on, mounted}) => {
     }).addTo(map);
 
     L.control.locate({
-      locateOptions: { enableHighAccuracy: true }
+      locateOptions: {enableHighAccuracy: true}
     }).addTo(map);
 
     on('!+* map.$id', mark => {
