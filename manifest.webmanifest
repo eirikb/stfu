@@ -3,7 +3,7 @@
   "short_name": "STFU",
   "theme_color": "#ec2027",
   "background_color": "#ec2027",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",
