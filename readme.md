@@ -12,6 +12,7 @@ npm start
   - [x] Innlogging / auth
   - [ ] Styling av innlogging
   - [ ] Lasting av kart etter innlogging uten å måtte refreshe siden (sært)
+  - [ ] Flybilder
   - [ ] Service worker med masse caching (da også offline)
     - [ ] Knapp på kartet for å tømme cache
   - [ ] Vise turrute i kartet, samme som stikkut Når man trykker på kartet vise mer info (i boble) enn stikkut
