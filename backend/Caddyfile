@@ -13,4 +13,5 @@ stfu.run {
   proxy /user/ https://www.stikkut.no
   proxy /stikkut/ https://www.stikkut.no
   proxy /uploads/ https://www.stikkut.no
+  proxy /turar/ https://www.stikkut.no
 }
