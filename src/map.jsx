@@ -5,13 +5,12 @@ import 'leaflet.locatecontrol';
 import iconFiles from '../assets/*.svg';
 
 const icons = Object.entries(iconFiles).reduce((res, [key, value]) => {
-  const icon = L.icon({
+  res[key] = L.icon({
     iconUrl: value,
     iconSize: [32, 64],
     iconAnchor: [16, 64],
     popupAnchor: [0, -64]
   });
-  res[key] = icon;
   return res;
 }, {});
 
@@ -42,6 +41,24 @@ export default ({on, mounted, trigger}) => {
     L.control.zoom({
       position: 'bottomright'
     }).addTo(map);
+
+    new (L.Control.extend({
+      onAdd: function () {
+        const div = L.DomUtil.create('div', 'leaflet-control-locate leaflet-bar leaflet-control');
+        const a = L.DomUtil.create('a', 'leaflet-bar-part leaflet-bar-part-single');
+        a.title = 'Oppdater';
+        const span = L.DomUtil.create('span', 'fa fa-refresh');
+        div.appendChild(a);
+        a.appendChild(span);
+
+        div.addEventListener('click', () => {
+          localStorage.clear();
+          window.location.reload();
+        });
+
+        return div;
+      }
+    }))({position: 'bottomright'}).addTo(map);
 
     L.control.locate({
       locateOptions: {enableHighAccuracy: true},
