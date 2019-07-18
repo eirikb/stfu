@@ -19,8 +19,8 @@ npm start
   - [ ] Målelinjal
   - [ ] Service worker med masse caching (da også offline)
     - [ ] Knapp på kartet for å tømme cache
-  - [ ] Vise turrute i kartet, 
-  - Mer informasjon i infoboblen på kartet 
+  - [x] Vise turrute i kartet, 
+  - [x] Mer informasjon i infoboblen på kartet 
     - [x] Antall besøk
     - [x] Lengde
     - [x] Stigning/Høydemeter
