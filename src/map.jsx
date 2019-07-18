@@ -41,9 +41,13 @@ export default ({on, mounted, trigger}) => {
       position: 'bottomright'
     }).addTo(map);
 
+    let lastTrack;
     on('!+* track', track => {
+      if (lastTrack) {
+        lastTrack.removeFrom(map);
+      }
       const points = track.map(([lon, lat]) => new L.LatLng(lat, lon));
-      new L.Polyline(points, {
+      lastTrack = new L.Polyline(points, {
         smoothFactor: 1
       }).addTo(map);
     });
