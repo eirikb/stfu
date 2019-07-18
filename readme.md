@@ -13,6 +13,7 @@ npm start
   - [ ] Styling av innlogging
   - [x] Lasting av kart etter innlogging uten å måtte refreshe siden (sært)
   - [ ] Flybilder
+  - [ ] Defaultposisjon i kart - plukk fra stikkutbruker - husk i localStorage
   - [ ] Laste segmenter fra Doogal
   - [ ] Service worker med masse caching (da også offline)
     - [ ] Knapp på kartet for å tømme cache
