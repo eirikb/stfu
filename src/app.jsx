@@ -20,6 +20,6 @@ const view = ({on, when}) => <main>
   {on('map', () => <Map></Map>)}
 </main>;
 
-document.body.appendChild(dd.render(view));
+dd.append(document.body, view);
 
 dd.trigger('initAuth');

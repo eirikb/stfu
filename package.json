@@ -8,7 +8,7 @@
   "main": "backend",
   "license": "MIT",
   "dependencies": {
-    "@eirikb/domdom": "^1.0.8",
+    "@eirikb/domdom": "^1.1.0",
     "font-awesome": "^4.7.0",
     "leaflet": "^1.5.1",
     "leaflet.locatecontrol": "^0.67.0"
