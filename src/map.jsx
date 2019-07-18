@@ -26,10 +26,17 @@ export default ({on, mounted, trigger}) => {
   const mapElement = <div id="map"></div>;
   mounted(() => {
     const map = L.map(mapElement, {
-      zoomControl: false
+      zoomControl: false,
+      attributionControl: false
     }).setView([62.515, 6.1], 12);
+
+    L.control.attribution({
+      position: 'bottomright',
+      prefix: 'Leaflet | Stikk UT!'
+    }).addTo(map);
+
     L.tileLayer('https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={z}&x={x}&y={y}', {
-      attribution: '<a href="http://www.kartverket.no/">Kartverket</a>'
+      attribution: 'Kartverket'
     }).addTo(map);
 
     L.control.zoom({
