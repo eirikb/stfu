@@ -24,13 +24,20 @@ const grade = {
 export default ({on, mounted}) => {
   const mapElement = <div id="map"></div>;
   mounted(() => {
-    const map = L.map(mapElement).setView([62.515, 6.1], 12);
+    const map = L.map(mapElement, {
+      zoomControl: false
+    }).setView([62.515, 6.1], 12);
     L.tileLayer('https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={z}&x={x}&y={y}', {
       attribution: '<a href="http://www.kartverket.no/">Kartverket</a>'
     }).addTo(map);
 
+    L.control.zoom({
+      position: 'bottomright'
+    }).addTo(map);
+
     L.control.locate({
-      locateOptions: {enableHighAccuracy: true}
+      locateOptions: {enableHighAccuracy: true},
+      position: 'bottomright'
     }).addTo(map);
 
     on('!+* map.$id', mark => {

@@ -11,7 +11,7 @@ npm start
   - [x] Let's Encrypt
   - [x] Innlogging / auth
   - [ ] Styling av innlogging
-  - [ ] Lasting av kart etter innlogging uten å måtte refreshe siden (sært)
+  - [x] Lasting av kart etter innlogging uten å måtte refreshe siden (sært)
   - [ ] Flybilder
   - [ ] Laste segmenter fra Doogal
   - [ ] Service worker med masse caching (da også offline)
