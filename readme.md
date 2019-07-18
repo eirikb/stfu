@@ -5,7 +5,11 @@ npm start
 
 ## Plan
 
-
+  - [x] domdom
+  - [x] Reverse proxy
+  - [x] Custom domene
+  - [x] Let's Encrypt
+  - [x] Innlogging / auth
   - [ ] Styling av innlogging
   - [ ] Lasting av kart etter innlogging uten å måtte refreshe siden (sært)
   - [ ] Service worker med masse caching (da også offline)
