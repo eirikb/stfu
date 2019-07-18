@@ -9,9 +9,24 @@ async function query(path) {
   return parser.parseFromString(data, 'text/html');
 }
 
-export default ({on, set}) => {
+export default ({on, get, set, update}) => {
   on('+* route', route => {
     if (route === 'home') start();
+  });
+
+  on('= loadMark', async path => {
+    const marker = get(path);
+    set(`${path}.loading`, true);
+    const dom = await query(`/turar/${marker.page_id}`);
+    const stats = dom.querySelector('.hero__stat');
+    const tables = dom.querySelectorAll('.table--routeinfo') || [];
+    const trip = tables[0] ? [...tables[0].querySelectorAll('tr')].slice(1).map(tr => tr.innerText).join('<br>') : '';
+    const height = tables[1] ? [...tables[1].querySelectorAll('tr')].slice(1).map(tr => tr.innerText).join('<br>') : '';
+    update(path, {
+      visits: stats.innerText,
+      trip,
+      height
+    });
   });
 
   async function loadMapPoints() {

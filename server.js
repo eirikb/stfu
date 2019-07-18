@@ -14,7 +14,7 @@ app.use('/api/', proxy({
     '^/api/': ''
   }
 }));
-['user', 'stikkut', 'app'].forEach(path =>
+['user', 'stikkut', 'app', 'turar'].forEach(path =>
   app.use(`/${path}`, proxy({
     target: `https://www.stikkut.no/`,
     changeOrigin: true,

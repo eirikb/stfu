@@ -8,7 +8,8 @@ const icons = Object.entries(iconFiles).reduce((res, [key, value]) => {
   const icon = L.icon({
     iconUrl: value,
     iconSize: [32, 64],
-    iconAnchor: [16, 64]
+    iconAnchor: [16, 64],
+    popupAnchor: [0, -64]
   });
   res[key] = icon;
   return res;
@@ -21,7 +22,7 @@ const grade = {
   '3': 'black',
 };
 
-export default ({on, mounted}) => {
+export default ({on, mounted, trigger}) => {
   const mapElement = <div id="map"></div>;
   mounted(() => {
     const map = L.map(mapElement, {
@@ -40,13 +41,30 @@ export default ({on, mounted}) => {
       position: 'bottomright'
     }).addTo(map);
 
-    on('!+* map.$id', mark => {
-      const color = grade[mark.grade];
-      const iconName = mark.done ? `${color}_done` : color;
-      const icon = icons[iconName];
-      L.marker([mark.lat, mark.lon], {icon}).addTo(map)
-        .bindPopup(`${mark.name}`)
-    });
+    on('!+* map.$id', (mark, {path}) => {
+        const color = grade[mark.grade];
+        const iconName = mark.done ? `${color}_done` : color;
+        const icon = icons[iconName];
+
+        const popup = L.popup({}).setContent('yes');
+        L.marker([mark.lat, mark.lon], {icon})
+          .bindPopup(popup)
+          .addTo(map)
+          .on('click', () => trigger('loadMark', path));
+
+        on(`!+* ${path}.loading`, () =>
+          popup.setContent(`<h2>${mark.name}</h2> Laster...`)
+        );
+        on(`!+* ${path}.{length,visits,trip,height}`, () =>
+          popup.setContent(`
+<h2>${mark.name}</h2>
+${mark.visits} <br> 
+${mark.trip} <br>
+${mark.height} <br>
+`)
+        );
+      }
+    );
   });
 
   return mapElement;
