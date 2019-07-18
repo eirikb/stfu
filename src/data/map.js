@@ -17,7 +17,13 @@ export default ({on, get, set, update}) => {
   on('= loadMark', async path => {
     const marker = get(path);
     set(`${path}.loading`, true);
-    const dom = await query(`/turar/${marker.page_id}`);
+    const {page_id} = marker;
+    const [dom, track] = await Promise.all([
+      query(`/turar/${page_id}`),
+      fetch(`/turar/json/${page_id}`, {credentials: 'include'}).then(r => r.json())
+    ]);
+    set('track', track.track);
+
     const stats = dom.querySelector('.hero__stat');
     const tables = dom.querySelectorAll('.table--routeinfo') || [];
     const trip = tables[0] ? [...tables[0].querySelectorAll('tr')].slice(1).map(tr => tr.innerText).join('<br>') : '';

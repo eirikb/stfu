@@ -41,6 +41,13 @@ export default ({on, mounted, trigger}) => {
       position: 'bottomright'
     }).addTo(map);
 
+    on('!+* track', track => {
+      const points = track.map(([lon, lat]) => new L.LatLng(lat, lon));
+      new L.Polyline(points, {
+        smoothFactor: 1
+      }).addTo(map);
+    });
+
     on('!+* map.$id', (mark, {path}) => {
         const color = grade[mark.grade];
         const iconName = mark.done ? `${color}_done` : color;

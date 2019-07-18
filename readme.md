@@ -15,13 +15,15 @@ npm start
   - [ ] Flybilder
   - [ ] Defaultposisjon i kart - plukk fra stikkutbruker - husk i localStorage
   - [ ] Laste segmenter fra Doogal
+  - [ ] Vise høydemeter for posisjonen
+  - [ ] Målelinjal
   - [ ] Service worker med masse caching (da også offline)
     - [ ] Knapp på kartet for å tømme cache
   - [ ] Vise turrute i kartet, 
   - Mer informasjon i infoboblen på kartet 
-    - [ ] Antall besøk
-    - [ ] Lengde
-    - [ ] Stigning/Høydemeter
+    - [x] Antall besøk
+    - [x] Lengde
+    - [x] Stigning/Høydemeter
   - [ ] Menyknapp med:
     - [ ] Mulighet for å registrere tur (med turfølge, gidder ikke dato)
       - [ ] Må dobbeltsjekke at tur har blitt registrert
