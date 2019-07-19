@@ -1,17 +1,10 @@
-const parser = new DOMParser();
-
-async function query(path) {
-  if (localStorage[path]) {
-    return parser.parseFromString(localStorage[path], 'text/html');
-  }
-  const data = await fetch(path, {credentials: 'include'}).then(r => r.text());
-  localStorage[path] = data;
-  return parser.parseFromString(data, 'text/html');
-}
+import {queryDom, queryJson} from './query';
 
 export default ({on, get, set, update}) => {
-  on('+* route', route => {
-    if (route === 'home') start();
+  on('!+* auth', auth => {
+    if (auth) {
+      loadMap();
+    }
   });
 
   on('= loadMark', async path => {
@@ -19,8 +12,8 @@ export default ({on, get, set, update}) => {
     set(`${path}.loading`, true);
     const {page_id} = marker;
     const [dom, track] = await Promise.all([
-      query(`/turar/${page_id}`),
-      fetch(`/turar/json/${page_id}`, {credentials: 'include'}).then(r => r.json())
+      queryDom(`/turar/${page_id}`),
+      queryJson(`/turar/json/${page_id}`)
     ]);
     set('track', track.track);
 
@@ -36,18 +29,18 @@ export default ({on, get, set, update}) => {
   });
 
   async function loadMapPoints() {
-    const dom = await query('/stikkut/turer');
+    const dom = await queryDom('/stikkut/turer');
     const mapDataText = dom.querySelector('.routemap__container script').innerText;
     const mapDataJson = mapDataText.split(/[=\n]/)[2].replace(/;/, '');
     return JSON.parse(mapDataJson);
   }
 
   async function loadMyPoints() {
-    let dom = await query('/stikkut/min-side');
+    let dom = await queryDom('/stikkut/min-side');
     const allLink = dom.querySelector('.regtable__showall');
     if (allLink) {
       const href = allLink.getAttribute('href');
-      dom = await query(`/stikkut/min-side${href}`);
+      dom = await queryDom(`/stikkut/min-side${href}`);
     }
     const dones = [...dom.querySelectorAll('[data-route]')].map(node =>
       node.dataset.route
@@ -58,7 +51,7 @@ export default ({on, get, set, update}) => {
     }, {});
   }
 
-  async function start() {
+  async function loadMap() {
     set('info', 'Laster kart...');
     const [map, dones] = await Promise.all([loadMapPoints(), loadMyPoints()]);
     set('info', '');
