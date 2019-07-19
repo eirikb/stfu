@@ -2,7 +2,7 @@ trigger:
   - master
 
 pool:
-  vmImage: 'ubuntu-16.04'
+  vmImage: 'windows-2019'
 
 steps:
   - task: NodeTool@0
@@ -19,9 +19,17 @@ steps:
       command: 'custom'
       customCommand: 'run build'
 
-  - task: CopyFilesOverSSH@0
+  #- task: CopyFilesOverSSH@0
+  #  inputs:
+  #    sshEndpoint: 'stfu'
+  #    sourceFolder: 'dist'
+  #    contents: '**'
+  #    targetFolder: 'caddy/srv'
+
+  - task: AzureFileCopy@3
     inputs:
-      sshEndpoint: 'stfu'
-      sourceFolder: 'dist'
-      contents: '**'
-      targetFolder: 'caddy/srv'
+      SourcePath: 'dist'
+      azureSubscription: 'Visual Studio Enterprise – MPN(145fb177-89a7-4412-9c1f-6802580c3624)'
+      Destination: 'AzureBlob'
+      storage: 'eirikbstfu'
+      ContainerName: 'stfu'
