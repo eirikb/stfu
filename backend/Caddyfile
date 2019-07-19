@@ -6,7 +6,9 @@ stfu.run {
     X-Content-Type-Options "nosniff"
     Content-Security-Policy "default-src 'unsafe-inline' 'self'; img-src * data:"
   }
-  proxy /api https://www.stikkut.no {
-    without /api
-  }
+  proxy /app/ https://www.stikkut.no
+  proxy /user/ https://www.stikkut.no
+  proxy /stikkut/ https://www.stikkut.no
+  proxy /uploads/ https://www.stikkut.no
+  proxy /turar/ https://www.stikkut.no
 }
