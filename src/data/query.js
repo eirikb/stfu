@@ -1,7 +1,7 @@
 const parser = new DOMParser();
 
 export function query(path, options = {}) {
-  return fetch(`/api/${path}`, {credentials: 'include', ...options});
+  return fetch(`/api${path}`, {credentials: 'include', ...options});
 }
 
 export async function queryDom(path) {
