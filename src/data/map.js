@@ -44,8 +44,11 @@ export default ({on, get, set, update}) => {
 
   async function loadMyPoints() {
     let dom = await query('/stikkut/min-side');
-    const href = dom.querySelector('.regtable__showall').getAttribute('href');
-    dom = await query(`/stikkut/min-side${href}`);
+    const allLink = dom.querySelector('.regtable__showall');
+    if (allLink) {
+      const href = allLink.getAttribute('href');
+      dom = await query(`/stikkut/min-side${href}`);
+    }
     const dones = [...dom.querySelectorAll('[data-route]')].map(node =>
       node.dataset.route
     );
