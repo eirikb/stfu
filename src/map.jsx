@@ -24,10 +24,20 @@ const grade = {
 export default ({on, mounted, trigger}) => {
   const mapElement = <div id="map"></div>;
   mounted(() => {
+    let lastCenter = (localStorage.center || '').split(' ').map(p => parseFloat(p));
+    lastCenter = lastCenter.length === 3 ? lastCenter : null;
+    const center = lastCenter ? lastCenter.slice(0, 2) : [62.5, 6.1];
+    const zoom = lastCenter ? lastCenter[2] : 10;
     const map = L.map(mapElement, {
       zoomControl: false,
       attributionControl: false
-    }).setView([62.515, 6.1], 12);
+    }).setView(center, zoom);
+
+    map.on('move', () => {
+      const {lat, lng} = map.getCenter();
+      const zoom = map.getZoom();
+      localStorage.center = [lat, lng, zoom].join(' ');
+    });
 
     L.control.attribution({
       position: 'bottomright',
