@@ -13,9 +13,23 @@ html, body, main, #map {
 }
 
 .leaflet-container .leaflet-control-attribution, .leaflet-container .leaflet-control-scale {
-    font-size: 13px;
+    font-size: 20px;
 }
 
 .the-text-with-tiny-print {
     font-size: 10px;
+}
+
+.leaflet-bar-part, .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 40px !important;
+}
+
+.leaflet-bar-part span {
+    font-size: 22px !important;
+}
+
+.leaflet-control-zoom-in, .leaflet-control-zoom-out {
+    font-size: 28px !important;
 }
