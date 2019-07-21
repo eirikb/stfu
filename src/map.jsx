@@ -41,7 +41,7 @@ export default ({on, mounted, trigger}) => {
 
     L.control.attribution({
       position: 'bottomright',
-      prefix: 'Leaflet | Stikk UT!'
+      prefix: 'Leaflet | Den spanske inkvisisjonen | Stikk UT!'
     }).addTo(map);
 
     L.tileLayer('https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={z}&x={x}&y={y}', {
