@@ -10,13 +10,18 @@ const dd = domdom();
 user(dd);
 map(dd);
 
-const view = ({on, when}) => <main>
+const view = ({on, when, set}) => <main>
   {on('info', info => info)}
 
   {when('route',
     [
-      'login', () => <Login></Login>
+      'login', () => <Login></Login>,
+      'home', () => <button onClick={() => set('route', 'menu')}>MENU</button>,
+      'menu', () => <div>HERE IS A MENU, GUYS
+      <button onClick={() => set('route', 'home')}>CLOSE</button>
+    </div>
     ])}
+
   {on('map', () => <Map></Map>)}
 </main>;
 

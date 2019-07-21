@@ -48,10 +48,6 @@ export default ({on, mounted, trigger}) => {
       attribution: 'Kartverket'
     }).addTo(map);
 
-    L.control.zoom({
-      position: 'bottomright'
-    }).addTo(map);
-
     new (L.Control.extend({
       onAdd: function () {
         const div = L.DomUtil.create('div', 'leaflet-control-locate leaflet-bar leaflet-control');
@@ -69,6 +65,10 @@ export default ({on, mounted, trigger}) => {
         return div;
       }
     }))({position: 'bottomright'}).addTo(map);
+
+    L.control.zoom({
+      position: 'bottomright'
+    }).addTo(map);
 
     L.control.locate({
       locateOptions: {enableHighAccuracy: true},
