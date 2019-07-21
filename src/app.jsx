@@ -7,14 +7,15 @@ import Map from './map.jsx';
 import Login from './login.jsx';
 import {ApplicationInsights} from '@microsoft/applicationinsights-web';
 
-const appInsights = new ApplicationInsights({
-  config: {instrumentationKey: '4c55265c-dadc-4ad5-9334-b615c3c9e36d'}
-});
-appInsights.trackPageView({name: 'home'});
-
 const dd = domdom();
 user(dd);
 map(dd);
+
+const appInsights = new ApplicationInsights({
+  config: {instrumentationKey: '4c55265c-dadc-4ad5-9334-b615c3c9e36d'}
+});
+appInsights.loadAppInsights();
+appInsights.trackPageView({name: 'home'});
 
 const view = ({on, when}) => <main>
   {on('info', info => info)}
