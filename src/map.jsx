@@ -71,7 +71,9 @@ export default ({on, mounted, trigger}) => {
 
     L.control.locate({
       locateOptions: {enableHighAccuracy: true},
-      position: 'bottomright'
+      position: 'bottomright',
+      flyTo: true,
+      keepCurrentZoomLevel: true
     }).addTo(map);
 
     let lastTrack;
