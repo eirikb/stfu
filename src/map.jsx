@@ -54,19 +54,18 @@ export default ({on, mounted, trigger}) => {
 
     new (L.Control.extend({
       onAdd: function () {
-        const div = L.DomUtil.create('div', 'leaflet-control-locate leaflet-bar leaflet-control');
-        const a = L.DomUtil.create('a', 'leaflet-bar-part leaflet-bar-part-single');
-        a.title = 'Oppdater';
-        const span = L.DomUtil.create('span', 'fa fa-refresh');
-        div.appendChild(a);
-        a.appendChild(span);
-
-        div.addEventListener('click', () => {
+        function refresh() {
+          const center = localStorage.center;
           localStorage.clear();
+          localStorage.center = center;
           window.location.reload();
-        });
+        }
 
-        return div;
+        return <div class="leaflet-control-locate leaflet-bar leaflet-control" onClick={refresh}>
+          <a class="leaflet-bar-part leaflet-bar-part-single">
+            <span class="fa fa-refresh"></span>
+          </a>
+        </div>;
       }
     }))({position: 'bottomright'}).addTo(map);
 
