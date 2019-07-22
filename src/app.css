@@ -6,6 +6,7 @@ html, body, main, #map {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: "Helvetica Neue", serif;
 }
 
 .log {
@@ -32,4 +33,48 @@ html, body, main, #map {
 
 .leaflet-control-zoom-in, .leaflet-control-zoom-out {
     font-size: 28px !important;
+}
+
+a.menu {
+    position: fixed;
+    left: 10px;
+    bottom: 20px;
+    z-index: 1000;
+}
+
+div.menu {
+    position: absolute;
+    width: 300px;
+    height: 100vh;
+    z-index: 1000;
+    background-color: white;
+    flex-direction: column;
+    display: flex;
+}
+
+div.menu::after {
+    content: '';
+    height: 100px;
+}
+
+a.link {
+    color: rgb(46, 90, 58);
+    font-size: 20px;
+    margin-top: auto;
+}
+
+.modal {
+    z-index: 1000;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    bottom: 5px;
+    right: 5px;
+    background: white;
+}
+
+.modal-close {
+    position: fixed;
+    right: 20px;
+    top: 20px;
 }

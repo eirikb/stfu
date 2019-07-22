@@ -10,19 +10,24 @@ const dd = domdom();
 user(dd);
 map(dd);
 
-const view = ({on, when, set}) => <main>
+const view = ({ on, when, set }) => <main>
   {on('info', info => info)}
 
   {when('route',
     [
-      'login', () => <Login></Login>,
-      'home', () => <button onClick={() => set('route', 'menu')}>MENU</button>,
-      'menu', () => <div>HERE IS A MENU, GUYS
-      <button onClick={() => set('route', 'home')}>CLOSE</button>
+      'login', () => <Login/>,
+      'bedrift', () => <div class="modal">
+      <a class="modal-close fa fa-2x fa-close" onClick={() => set('route', 'home')}/>
+      <h1>BEDRIFTER!</h1>
+    </div>,
+      'home', () => <a onClick={() => set('route', 'menu')} class="menu fa fa-3x fa-bars"/>,
+      'menu', () => <div class="menu">
+      <a class="link" onClick={() => set('route', 'bedrift')}>Bedrift</a>
+      <a class="menu fa fa-3x fa-close" onClick={() => set('route', 'home')}/>
     </div>
     ])}
 
-  {on('map', () => <Map></Map>)}
+  {on('map', () => <Map/>)}
 </main>;
 
 dd.append(document.body, view);
