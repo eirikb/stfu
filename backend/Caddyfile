@@ -4,7 +4,7 @@ stfu.run {
     X-Frame-Options "DENY"
     X-XSS-Protection "1; mode=block"
     X-Content-Type-Options "nosniff"
-    Content-Security-Policy "default-src 'unsafe-inline' 'self'; img-src * data:"
+    Content-Security-Policy "default-src 'unsafe-inline' 'self' https://dc.services.visualstudio.com/v2/track; img-src * data:"
   }
   proxy /app/ https://www.stikkut.no
   proxy /user/ https://www.stikkut.no
