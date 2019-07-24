@@ -5,6 +5,7 @@ import user from './data/user';
 import map from './data/map';
 import Map from './map.jsx';
 import Login from './login.jsx';
+import Bedrifter from './bedrifter.jsx';
 
 const dd = domdom();
 user(dd);
@@ -16,13 +17,10 @@ const view = ({ on, when, set }) => <main>
   {when('route',
     [
       'login', () => <Login/>,
-      'bedrift', () => <div class="modal">
-      <a class="modal-close fa fa-2x fa-close" onClick={() => set('route', 'home')}/>
-      <h1>BEDRIFTER!</h1>
-    </div>,
+      'bedrift', () => <Bedrifter/>,
       'home', () => <a onClick={() => set('route', 'menu')} class="menu fa fa-3x fa-bars"/>,
       'menu', () => <div class="menu">
-      <a class="link" onClick={() => set('route', 'bedrift')}>Bedrift</a>
+      <a class="link" onClick={() => set('route', 'bedrift')}>Toppliste Bedrift</a>
       <a class="menu fa fa-3x fa-close" onClick={() => set('route', 'home')}/>
     </div>
     ])}
