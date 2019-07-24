@@ -3,13 +3,15 @@ import 'font-awesome/css/font-awesome.css';
 import domdom from '@eirikb/domdom';
 import user from './data/user';
 import map from './data/map';
+import bedrift from './data/bedrift';
 import Map from './map.jsx';
 import Login from './login.jsx';
-import Bedrifter from './bedrifter.jsx';
+import Bedrift from './bedrift.jsx';
 
 const dd = domdom();
 user(dd);
 map(dd);
+bedrift(dd);
 
 const view = ({ on, when, set }) => <main>
   {on('info', info => info)}
@@ -17,7 +19,7 @@ const view = ({ on, when, set }) => <main>
   {when('route',
     [
       'login', () => <Login/>,
-      'bedrift', () => <Bedrifter/>,
+      'bedrift', () => <Bedrift/>,
       'home', () => <a onClick={() => set('route', 'menu')} class="menu fa fa-3x fa-bars"/>,
       'menu', () => <div class="menu">
       <a class="link" onClick={() => set('route', 'bedrift')}>Toppliste Bedrift</a>
