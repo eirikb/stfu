@@ -58,7 +58,7 @@ div.menu {
 
 div.wrapper::after {
     content: '';
-    height: 100px;
+    height: 20vh;
     display: block;
 }
 
