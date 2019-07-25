@@ -48,19 +48,26 @@ div.menu {
     height: 100vh;
     z-index: 1000;
     background-color: white;
-    flex-direction: column;
-    display: flex;
 }
 
-div.menu::after {
+.wrapper {
+    height: 100vh;
+    display: table-cell;
+    vertical-align: bottom;
+}
+
+div.wrapper::after {
     content: '';
     height: 100px;
+    display: block;
 }
 
 a.link {
     color: rgb(46, 90, 58);
     font-size: 20px;
     margin-top: auto;
+    display: block;
+    padding: 10px;
 }
 
 .modal {
@@ -69,6 +76,7 @@ a.link {
     left: 5px;
     top: 5px;
     right: 5px;
+    min-height: 90%;
     background: white;
 }
 
