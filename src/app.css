@@ -64,11 +64,10 @@ a.link {
 }
 
 .modal {
-    z-index: 1000;
+    z-index: 100000;
     position: absolute;
     left: 5px;
     top: 5px;
-    bottom: 5px;
     right: 5px;
     background: white;
 }
