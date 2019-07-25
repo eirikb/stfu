@@ -9,9 +9,10 @@ export default function ({ when, get, set }) {
         <table>
           <thead>
           <tr>
-            <th>X</th>
-            <th>Y</th>
-            <th>Z</th>
+            <th>Nr.</th>
+            <th>Navn</th>
+            <th>Turer</th>
+            <th>Turmål</th>
           </tr>
           </thead>
           <tbody>
@@ -19,11 +20,8 @@ export default function ({ when, get, set }) {
               {row.map(cell => <td>{cell}</td>)}
             </tr>
           ))}
-
           </tbody>
         </table>
-
-
       </div>
     ])}
   </div>;
