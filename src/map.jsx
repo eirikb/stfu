@@ -21,8 +21,8 @@ const grade = {
   '3': 'black',
 };
 
-export default ({on, mounted, trigger}) => {
-  const mapElement = <div id="map"></div>;
+export default ({ on, mounted, trigger, set }) => {
+  const mapElement = <div id="map" onClick={() => set('route', 'home')}></div>;
   mounted(() => {
     let lastCenter = (localStorage.center || '').split(' ').map(p => parseFloat(p));
     lastCenter = lastCenter.length === 3 ? lastCenter : null;
@@ -34,7 +34,7 @@ export default ({on, mounted, trigger}) => {
     }).setView(center, zoom);
 
     map.on('move', () => {
-      const {lat, lng} = map.getCenter();
+      const { lat, lng } = map.getCenter();
       const zoom = map.getZoom();
       localStorage.center = [lat, lng, zoom].join(' ');
     });
@@ -46,10 +46,6 @@ export default ({on, mounted, trigger}) => {
 
     L.tileLayer('https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={z}&x={x}&y={y}', {
       attribution: 'Kartverket'
-    }).addTo(map);
-
-    L.control.zoom({
-      position: 'bottomright'
     }).addTo(map);
 
     new (L.Control.extend({
@@ -67,10 +63,14 @@ export default ({on, mounted, trigger}) => {
           </a>
         </div>;
       }
-    }))({position: 'bottomright'}).addTo(map);
+    }))({ position: 'bottomright' }).addTo(map);
+
+    L.control.zoom({
+      position: 'bottomright'
+    }).addTo(map);
 
     L.control.locate({
-      locateOptions: {enableHighAccuracy: true},
+      locateOptions: { enableHighAccuracy: true },
       position: 'bottomright',
       flyTo: true,
       keepCurrentZoomLevel: true
@@ -87,13 +87,13 @@ export default ({on, mounted, trigger}) => {
       }).addTo(map);
     });
 
-    on('!+* map.$id', (mark, {path}) => {
+    on('!+* map.$id', (mark, { path }) => {
         const color = grade[mark.grade];
         const iconName = mark.done ? `${color}_done` : color;
         const icon = icons[iconName];
 
         const popup = L.popup({}).setContent('yes');
-        L.marker([mark.lat, mark.lon], {icon})
+        L.marker([mark.lat, mark.lon], { icon })
           .bindPopup(popup)
           .addTo(map)
           .on('click', () => trigger('loadMark', path));
