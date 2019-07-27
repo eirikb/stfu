@@ -15,6 +15,7 @@ const dd = domdom();
 user(dd);
 map(dd);
 bedrift(dd);
+kode(dd);
 
 const appInsights = new ApplicationInsights({
   config: { instrumentationKey: '4c55265c-dadc-4ad5-9334-b615c3c9e36d' }

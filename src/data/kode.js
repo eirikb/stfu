@@ -1,20 +1,34 @@
 import { queryDom } from './query';
 
 export default function ({ on, set }) {
-  on('!+* route', route => {
-    if (route === 'bedrift') {
-      init();
-    }
-  });
+  set('kode.tur', false);
 
-  async function init() {
-    set('bedrift.loading', true);
+  on('= registrer', async e => {
+    e.preventDefault();
+    const body = (e.target.kode.value || '').split('').map(part =>
+      [encodeURIComponent('code[]'), encodeURIComponent(part)].join('=')
+    ).join('&');
 
-    const dom = await queryDom('stikkut/stikk-ut-bedrift', {
-      cache: false
+    const dom = await queryDom('/stikkut/min-side', {
+      cache: false,
+      method: 'post',
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      body
     });
-    const rows = [...dom.querySelectorAll('table tr.table__entry')].map(row => [...row.querySelectorAll('td')].map(td => td.innerText));
-    set('bedrift.rows', rows);
-    set('bedrift.loading', false);
-  }
+
+    const companions = [...dom.querySelectorAll('.form__companion')].map(companionDiv => {
+      const id = companionDiv.querySelector('input').value;
+      const text = companionDiv.innerText.trim();
+      return { id, text }
+    });
+    const tur = {
+      to: dom.querySelector('.form__routename').innerText,
+      companions
+    };
+
+    console.log('tur', tur);
+    set('kode.tur', tur);
+  });
 }

@@ -6,10 +6,11 @@ export function query(path, options = {}) {
 
 export async function queryDom(path, options) {
   const cache = (options || {}).cache !== false;
+  delete (options || {}).cache;
   if (cache && localStorage[path]) {
     return parser.parseFromString(localStorage[path], 'text/html');
   }
-  const data = await query(path).then(r => r.text());
+  const data = await query(path, options).then(r => r.text());
   localStorage[path] = data;
   return parser.parseFromString(data, 'text/html');
 }

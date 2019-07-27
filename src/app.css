@@ -89,3 +89,24 @@ a.link {
 a {
     cursor: pointer;
 }
+
+.kode input {
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    border: 1px solid;
+    letter-spacing: .1rem;
+}
+
+.kode button {
+    background-color: #ec2027;
+    border: 0.1rem solid #ec2027;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 24px;
+    height: 3.8rem;
+    letter-spacing: .1rem;
+    padding: 0 20px;
+    text-transform: uppercase;
+}
