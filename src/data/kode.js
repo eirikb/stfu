@@ -3,8 +3,9 @@ import { queryDom } from './query';
 export default function ({ on, set }) {
   set('kode.tur', false);
 
-  on('= registrer', async e => {
+  on('= check', async e => {
     e.preventDefault();
+    set('kode.status', 'Sjekker...');
     const body = (e.target.kode.value || '').split('').map(part =>
       [encodeURIComponent('code[]'), encodeURIComponent(part)].join('=')
     ).join('&');
@@ -23,12 +24,28 @@ export default function ({ on, set }) {
       const text = companionDiv.innerText.trim();
       return { id, text }
     });
-    const tur = {
-      to: dom.querySelector('.form__routename').innerText,
-      companions
-    };
-
-    console.log('tur', tur);
-    set('kode.tur', tur);
+    const routeNameElement = dom.querySelector('.form__routename');
+    const found = !!routeNameElement;
+    if (found) {
+      set('kode.status', '');
+      const tur = {
+        to: routeNameElement.innerText,
+        companions
+      };
+      set('kode.tur', tur);
+    } else {
+      set('kode.status', 'Finner ikke tur');
+    }
   });
+
+  on('= register', e => {
+    e.preventDefault();
+    const values = [...e.target.companions]
+      .filter(cb => cb.checked)
+      .map(cb => cb.value);
+    console.log('reigster the kode!', e.target.companions);
+    console.log('values', values);
+    // TODO: domdom bug
+    set('kode.status', 'Registrerer...');
+  })
 }
