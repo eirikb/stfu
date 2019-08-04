@@ -1,7 +1,13 @@
 import { queryDom } from './query';
 
 export default function ({ on, set }) {
+
   set('kode.tur', false);
+  on('+* kode.tur', tur => {
+    if (tur === false) {
+      set('kode.status', '');
+    }
+  });
 
   on('= check', async e => {
     e.preventDefault();
@@ -32,6 +38,7 @@ export default function ({ on, set }) {
         to: routeNameElement.innerText,
         companions
       };
+      console.log('set', tur);
       set('kode.tur', tur);
     } else {
       set('kode.status', 'Finner ikke tur');
@@ -45,7 +52,6 @@ export default function ({ on, set }) {
       .map(cb => cb.value);
     console.log('reigster the kode!', e.target.companions);
     console.log('values', values);
-    // TODO: domdom bug
     set('kode.status', 'Registrerer...');
   })
 }

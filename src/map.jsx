@@ -87,30 +87,32 @@ export default ({ on, mounted, trigger, set }) => {
       }).addTo(map);
     });
 
-    on('!+* map.$id', (mark, { path }) => {
-        const color = grade[mark.grade];
-        const iconName = mark.done ? `${color}_done` : color;
-        const icon = icons[iconName];
-
-        const popup = L.popup({}).setContent('yes');
-        L.marker([mark.lat, mark.lon], { icon })
-          .bindPopup(popup)
-          .addTo(map)
-          .on('click', () => trigger('loadMark', path));
-
-        on(`!+* ${path}.loading`, () =>
-          popup.setContent(`<h2>${mark.name}</h2> Laster...`)
-        );
-        on(`!+* ${path}.{length,visits,trip,height}`, () =>
-          popup.setContent(`
-<h2>${mark.name}</h2>
-${mark.visits} <br> 
-${mark.trip} <br>
-${mark.height} <br>
-`)
-        );
-      }
-    );
+//     on('!+* map.$id', (mark, { path }) => {
+//         if (!map.lat || !map.lon) return;
+//         return;
+//       const color = grade[mark.grade];
+//         const iconName = mark.done ? `${color}_done` : color;
+//         const icon = icons[iconName];
+//
+//         const popup = L.popup({}).setContent('yes');
+//         L.marker([mark.lat, mark.lon], { icon })
+//           .bindPopup(popup)
+//           .addTo(map)
+//           .on('click', () => trigger('loadMark', path));
+//
+//         on(`!+* ${path}.loading`, () =>
+//           popup.setContent(`<h2>${mark.name}</h2> Laster...`)
+//         );
+//         on(`!+* ${path}.{length,visits,trip,height}`, () =>
+//           popup.setContent(`
+// <h2>${mark.name}</h2>
+// ${mark.visits} <br>
+// ${mark.trip} <br>
+// ${mark.height} <br>
+// `)
+//         );
+//       }
+//     );
   });
 
   return mapElement;

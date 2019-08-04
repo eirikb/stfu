@@ -7,9 +7,6 @@ export default function ({ on, when, text, set, trigger }) {
   }
 
   function RegisterForm({ tur }) {
-    // TODO: Fix in domdom
-    if (!tur.companions) return <div></div>;
-
     return <form onSubmit={e => trigger('register', e)}>
       <h2>{tur.to}</h2>
       {tur.companions.map((companion, i) =>
@@ -41,7 +38,10 @@ export default function ({ on, when, text, set, trigger }) {
 
       {when('kode.tur', [
         false, () => <CheckForm/>,
-        tur => !!tur, tur => <RegisterForm dd-input-tur={tur}/>
+        tur => {
+          console.log('ok?', tur);
+          return !!tur
+        }, tur => <RegisterForm dd-input-tur={tur}/>
       ])}
       {text('kode.status')}
     </div>
