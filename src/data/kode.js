@@ -1,6 +1,6 @@
-import { queryDom } from './query';
+import { postForm, queryDom } from './query';
 
-export default function ({ on, set }) {
+export default function ({ on, get, set }) {
 
   set('kode.tur', false);
   on('+* kode.tur', tur => {
@@ -12,18 +12,11 @@ export default function ({ on, set }) {
   on('= check', async e => {
     e.preventDefault();
     set('kode.status', 'Sjekker...');
-    const body = (e.target.kode.value || '').split('').map(part =>
-      [encodeURIComponent('code[]'), encodeURIComponent(part)].join('=')
-    ).join('&');
 
-    const dom = await queryDom('/stikkut/min-side', {
-      method: 'post',
-      headers: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      body
+    const kode = e.target.kode.value;
+    const dom = await postForm('/stikkut/min-side', {
+      'code[]': kode.split('')
     });
-
     const companions = [...dom.querySelectorAll('.form__companion')].map(companionDiv => {
       const id = companionDiv.querySelector('input').value;
       const text = companionDiv.innerText.trim();
@@ -38,18 +31,34 @@ export default function ({ on, set }) {
         companions
       };
       set('kode.tur', tur);
+      set('kode.kode', kode);
     } else {
       set('kode.status', 'Finner ikke tur');
     }
   });
 
-  on('= register', e => {
+  on('= register', async e => {
     e.preventDefault();
     const values = [...e.target.companions]
       .filter(cb => cb.checked)
       .map(cb => cb.value);
-    console.log('reigster the kode!', e.target.companions);
-    console.log('values', values);
-    set('kode.status', 'Registrerer...');
-  })
+    const kode = get('kode.kode');
+    set('kode.status', `Registrerer ${kode}...`);
+    const date = new Date().toISOString().split('T')[0];
+    let dom = await postForm('/stikkut/min-side', {
+      codeword: kode,
+      'members[]': values,
+      date
+    });
+    const ok = ((dom.querySelector('.hero__intro') || {}).innerText || '').match(/Koden er registrert/);
+    if (ok) {
+      set('kode.tur', false);
+      set('kode.status', 'Koden er registrert! Dobbeltsjekker...');
+      dom = await queryDom('/stikkut/min-side');
+      const lastTur = dom.querySelector('.regtable__name').innerText;
+      set('kode.status', 'Koden er registrert! Siste tur: ' + lastTur);
+    } else {
+      set('kode.status', 'Noe gikk galt - IKKE registrert');
+    }
+  });
 }
