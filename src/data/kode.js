@@ -17,7 +17,6 @@ export default function ({ on, set }) {
     ).join('&');
 
     const dom = await queryDom('/stikkut/min-side', {
-      cache: false,
       method: 'post',
       headers: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -38,7 +37,6 @@ export default function ({ on, set }) {
         to: routeNameElement.innerText,
         companions
       };
-      console.log('set', tur);
       set('kode.tur', tur);
     } else {
       set('kode.status', 'Finner ikke tur');

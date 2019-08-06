@@ -38,10 +38,7 @@ export default function ({ on, when, text, set, trigger }) {
 
       {when('kode.tur', [
         false, () => <CheckForm/>,
-        tur => {
-          console.log('ok?', tur);
-          return !!tur
-        }, tur => <RegisterForm dd-input-tur={tur}/>
+        tur => !!tur, tur => <RegisterForm dd-input-tur={tur}/>
       ])}
       {text('kode.status')}
     </div>
