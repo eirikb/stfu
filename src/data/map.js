@@ -1,6 +1,6 @@
-import {queryDom, queryJson} from './query';
+import { queryDom, queryJson } from './query';
 
-export default ({on, get, set, update}) => {
+export default ({ on, get, set, update }) => {
   on('!+* auth', auth => {
     if (auth) {
       loadMap();
@@ -10,7 +10,7 @@ export default ({on, get, set, update}) => {
   on('= loadMark', async path => {
     const marker = get(path);
     set(`${path}.loading`, true);
-    const {page_id} = marker;
+    const { page_id } = marker;
     const [dom, track] = await Promise.all([
       queryDom(`/turar/${page_id}`),
       queryJson(`/turar/json/${page_id}`)
