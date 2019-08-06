@@ -104,7 +104,7 @@ export default ({ on, mounted, trigger, set }) => {
         on(`!+* ${path}.{length,visits,trip,height}`, () =>
           popup.setContent(`
 <h2>${mark.name}</h2>
-${mark.visits} <br> 
+${mark.visits} <br>
 ${mark.trip} <br>
 ${mark.height} <br>
 `)

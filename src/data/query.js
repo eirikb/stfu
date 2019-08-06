@@ -5,15 +5,24 @@ export function query(path, options = {}) {
 }
 
 export async function queryDom(path, options) {
-  const cache = (options || {}).cache !== false;
-  if (cache && localStorage[path]) {
-    return parser.parseFromString(localStorage[path], 'text/html');
-  }
-  const data = await query(path).then(r => r.text());
-  localStorage[path] = data;
+  const data = await query(path, options).then(r => r.text());
   return parser.parseFromString(data, 'text/html');
 }
 
 export function queryJson(path) {
   return query(path).then(res => res.json());
+}
+
+export function postForm(path, bodyObject) {
+  const body = Object.entries(bodyObject).map(([key, value]) =>
+    [].concat(value).map(part =>
+      [encodeURIComponent(key), encodeURIComponent(part)].join('=')
+    ).join('&')).join('&');
+  return queryDom(path, {
+    method: 'post',
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    body
+  });
 }

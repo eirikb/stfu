@@ -8,7 +8,7 @@
   "main": "backend",
   "license": "MIT",
   "dependencies": {
-    "@eirikb/domdom": "^1.1.1",
+    "@eirikb/domdom": "1.1.5",
     "@microsoft/applicationinsights-web": "^2.1.0",
     "font-awesome": "^4.7.0",
     "leaflet": "^1.5.1",
