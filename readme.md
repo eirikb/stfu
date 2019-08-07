@@ -10,7 +10,9 @@ npm start
   - [x] Custom domene
   - [x] Let's Encrypt
   - [x] Innlogging / auth
-  - [ ] Styling av innlogging
+  - [ ] Styling 
+    - [ ] Bytte ikoner til noe kulere enn FontAwesome
+    - [ ] Lage litt spinners for lastinger
   - [x] Lasting av kart etter innlogging uten å måtte refreshe siden (sært)
   - [ ] Flybilder
   - [x] Defaultposisjon i kart - plukk fra stikkutbruker - husk i localStorage
@@ -18,6 +20,8 @@ npm start
   - [ ] Vise høydemeter for posisjonen
   - [ ] Målelinjal
   - [x] Clientsidelogging (Application Insights)
+   - [ ] Ikke logg noe for localhost
+   - [ ] Feilhåndtering (vise side med feil når noe tryner)
   - [ ] Service worker med masse caching (da også offline)
     - [ ] Knapp på kartet for å tømme cache
   - [x] Vise turrute i kartet, 
@@ -25,7 +29,7 @@ npm start
     - [x] Antall besøk
     - [x] Lengde
     - [x] Stigning/Høydemeter
-  - [ ] Menyknapp med:
+  - [x] Menyknapp med:
     - [x] Mulighet for å registrere tur (med turfølge, gidder ikke dato)
       - [x] Må dobbeltsjekke at tur har blitt registrert
       - [ ] Tømme cache
