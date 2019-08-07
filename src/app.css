@@ -115,15 +115,18 @@ a {
     color: red;
 }
 
-.loading {
+.full {
     position: absolute;
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
+    overflow: hidden;
+}
+
+.loading {
     z-index: 9000;
     background-color: white;
-    overflow: hidden;
 }
 
 .loading img {
@@ -136,4 +139,19 @@ a {
 .loading h2 {
     text-align: center;
     bottom: 0;
+}
+
+#intro {
+    position: absolute;
+    background-color: #ec2027;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#intro h2 {
+    font-weight: 100;
+    color: white;
 }

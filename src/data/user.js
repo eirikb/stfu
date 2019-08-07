@@ -2,10 +2,10 @@ import { query } from './query';
 
 export default ({ on, set }) => {
   on('= initAuth', async () => {
-    set('loading', 'Logger på');
     const authed = await query('/stikkut/min-side').then(r => !r.url.match(/login/));
-
-    set('loading', false);
+    document.body.removeChild(
+      document.querySelector('#intro')
+    );
     set('auth', authed);
     set('route', authed ? 'home' : 'login');
   });

@@ -29,6 +29,7 @@ npm start
     - [x] ~~Antall besøk~~
     - [x] ~~Lengde~~
     - [x] ~~Stigning/Høydemeter~~
+    - [ ] Vise turinfo - egen modal
   - [x] ~~Menyknapp med:~~
     - [x] ~~Mulighet for å registrere tur (med turfølge, gidder ikke dato)~~
       - [x] ~~Må dobbeltsjekke at tur har blitt registrert~~
