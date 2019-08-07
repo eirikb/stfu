@@ -5,7 +5,7 @@ npm start
 
 ## Plan
 
-  - [x] --domdom--
+  - [x] ~~domdom~~
   - [x] Reverse proxy
   - [x] Custom domene
   - [x] Let's Encrypt
