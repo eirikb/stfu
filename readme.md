@@ -17,7 +17,7 @@ npm start
   - [ ] Laste segmenter fra Doogal
   - [ ] Vise høydemeter for posisjonen
   - [ ] Målelinjal
-  - [ ] Clientsidelogging (Application Insights)
+  - [x] Clientsidelogging (Application Insights)
   - [ ] Service worker med masse caching (da også offline)
     - [ ] Knapp på kartet for å tømme cache
   - [x] Vise turrute i kartet, 
@@ -26,10 +26,10 @@ npm start
     - [x] Lengde
     - [x] Stigning/Høydemeter
   - [ ] Menyknapp med:
-    - [ ] Mulighet for å registrere tur (med turfølge, gidder ikke dato)
-      - [ ] Må dobbeltsjekke at tur har blitt registrert
+    - [x] Mulighet for å registrere tur (med turfølge, gidder ikke dato)
+      - [x] Må dobbeltsjekke at tur har blitt registrert
       - [ ] Tømme cache
     - [ ] Utlogging (noen som etterspurte dette, hurr)
-    - [ ] Utlisting av topplisten for bedrift (spesielt innad i bedriften)
+    - [x] Utlisting av topplisten for bedrift (spesielt innad i bedriften)
 
 
