@@ -10,7 +10,7 @@ npm start
   - [x] ~~Custom domene~~
   - [x] ~~Let's Encrypt~~
   - [x] ~~Innlogging / auth~~
-  - [ ] Styling 
+  - [ ] Styling
     - [ ] Bytte ikoner til noe kulere enn FontAwesome
     - [ ] Lage litt spinners for lastinger
   - [x] ~~Lasting av kart etter innlogging uten å måtte refreshe siden (sært)~~
@@ -20,8 +20,8 @@ npm start
   - [ ] Vise høydemeter for posisjonen
   - [ ] Målelinjal
   - [x] ~~Clientsidelogging (Application Insights)~~
-   - [ ] Ikke logg noe for localhost
-   - [ ] Feilhåndtering (vise side med feil når noe tryner)
+   - [x] ~~Ikke logg noe for localhost~~
+   - [x] ~~Feilhåndtering (vise side med feil når noe tryner)~~
   - [ ] Service worker med masse caching (da også offline)
     - [ ] Knapp på kartet for å tømme cache
   - [x] ~~Vise turrute i kartet~~
@@ -33,7 +33,7 @@ npm start
     - [x] ~~Mulighet for å registrere tur (med turfølge, gidder ikke dato)~~
       - [x] ~~Må dobbeltsjekke at tur har blitt registrert~~
       - [ ] Tømme cache
-    - [ ] Utlogging (noen som etterspurte dette, hurr)
+    - [x] ~~Utlogging (noen som etterspurte dette, hurr)~~
     - [x] ~~Utlisting av topplisten for bedrift (spesielt innad i bedriften)~~
 
 

@@ -1,6 +1,6 @@
-import {query} from './query';
+import { query } from './query';
 
-export default ({on, set}) => {
+export default ({ on, set }) => {
   on('= initAuth', async () => {
     set('info', 'Logger på...');
     const authed = await query('/stikkut/min-side').then(r => !r.url.match(/login/));
@@ -26,5 +26,14 @@ export default ({on, set}) => {
       set('login.failed', 'Pålogging feilet. Prøv på nytt!');
       set('info', '');
     }
+  });
+
+  on('= logout', async () => {
+    if (!confirm('Er ikke du ikke sikker på du ikke vil ikke logge ut?')) return;
+
+    localStorage.clear();
+    sessionStorage.clear();
+    await query('/user/logout');
+    window.location.reload();
   });
 };
