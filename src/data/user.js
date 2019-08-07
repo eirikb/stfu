@@ -2,29 +2,29 @@ import { query } from './query';
 
 export default ({ on, set }) => {
   on('= initAuth', async () => {
-    set('info', 'Logger på...');
+    set('loading', 'Logger på');
     const authed = await query('/stikkut/min-side').then(r => !r.url.match(/login/));
 
-    set('info', '');
+    set('loading', false);
     set('auth', authed);
     set('route', authed ? 'home' : 'login');
   });
 
   on('= login', async e => {
     e.preventDefault();
-    set('info', 'Logger på...');
+    set('loading', 'Logger på');
     set('login.failed', '');
     const data = new URLSearchParams(new FormData(e.target));
     const authed = await query('/user/login', {
       method: 'post',
       body: data
     }).then(r => !r.url.match(/login/));
+    set('loading', false);
     if (authed) {
       set('route', 'home');
       set('auth', true);
     } else {
       set('login.failed', 'Pålogging feilet. Prøv på nytt!');
-      set('info', '');
     }
   });
 

@@ -11,6 +11,7 @@ import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import Bedrift from './bedrift.jsx';
 import Kode from './kode';
 import Error from './error';
+import Loading from './loading';
 
 const dd = domdom();
 user(dd);
@@ -36,6 +37,9 @@ if (!isLocalhost) {
 
 const view = ({ on, when, set, trigger }) => <main>
   {on('info', info => info)}
+  {when('loading', [
+    l => !!l, loading => <Loading dd-input-loading={loading}/>
+  ])}
 
   {when('route',
     [

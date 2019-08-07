@@ -52,13 +52,13 @@ export default ({ on, get, set, update }) => {
   }
 
   async function loadMap() {
-    set('info', 'Laster kart...');
+    set('loading', 'Laster kart');
     const [map, dones] = await Promise.all([loadMapPoints(), loadMyPoints()]);
-    set('info', '');
     set('map', map.reduce((res, mark) => {
       mark.done = !!dones[mark.page_id];
       res[mark.id] = mark;
       return res;
     }, {}));
+    set('loading', false);
   }
 };

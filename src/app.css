@@ -39,7 +39,7 @@ a.menu {
     position: fixed;
     left: 10px;
     bottom: 20px;
-    z-index: 1000;
+    z-index: 10000;
 }
 
 div.menu {
@@ -113,4 +113,27 @@ a {
 
 .darn {
     color: red;
+}
+
+.loading {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9000;
+    background-color: white;
+    overflow: hidden;
+}
+
+.loading img {
+    width: 70%;
+    height: 70%;
+    margin-left: 15%;
+    position: relative;
+}
+
+.loading h2 {
+    text-align: center;
+    bottom: 0;
 }
