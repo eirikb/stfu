@@ -47,6 +47,7 @@ const view = ({ on, when, set, trigger }) => <main>
       'login', () => <Login/>,
       'bedrift', () => <Bedrift/>,
       'kode', () => <Kode/>,
+      'more', () => <More/>,
       'error', () => <Error/>,
       'home', () => <a onClick={() => set('route', 'menu')} class="menu fa fa-3x fa-bars"/>,
       'menu', () => <div class="menu">
