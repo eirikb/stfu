@@ -83,7 +83,7 @@ a.link {
 .modal-close {
     position: fixed;
     right: 20px;
-    bottom: 50px;
+    top: 20px;
 }
 
 a {
