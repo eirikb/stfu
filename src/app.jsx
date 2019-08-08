@@ -12,6 +12,8 @@ import Bedrift from './bedrift.jsx';
 import Kode from './kode';
 import Error from './error';
 import Loading from './loading';
+import More from './more';
+import { isLocalhost } from './data/query';
 
 const dd = domdom();
 user(dd);
@@ -19,7 +21,6 @@ map(dd);
 bedrift(dd);
 kode(dd);
 
-const isLocalhost = window.location.host.match(/localhost/);
 if (!isLocalhost) {
   const appInsights = new ApplicationInsights({
     config: { instrumentationKey: '4c55265c-dadc-4ad5-9334-b615c3c9e36d' }
