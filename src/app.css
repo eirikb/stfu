@@ -83,7 +83,7 @@ a.link {
 .modal-close {
     position: fixed;
     right: 20px;
-    top: 20px;
+    bottom: 50px;
 }
 
 a {
@@ -134,7 +134,7 @@ a {
 }
 
 .loading img {
-    width: 300px;
+    width: 200px;
     /*height: 50%;*/
 }
 
