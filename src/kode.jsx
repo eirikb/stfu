@@ -1,4 +1,4 @@
-export default function ({ on, when, text, set, trigger }) {
+export default function ({ when, text, set, trigger }) {
 
   function inputMode(e) {
     const { target } = e;
