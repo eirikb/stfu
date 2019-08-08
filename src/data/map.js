@@ -19,12 +19,33 @@ export default ({ on, get, set, update }) => {
 
     const stats = dom.querySelector('.hero__stat');
     const tables = dom.querySelectorAll('.table--routeinfo') || [];
-    const trip = tables[0] ? [...tables[0].querySelectorAll('tr')].slice(1).map(tr => tr.innerText).join('<br>') : '';
-    const height = tables[1] ? [...tables[1].querySelectorAll('tr')].slice(1).map(tr => tr.innerText).join('<br>') : '';
+    const trip = tables[0] ? [...tables[0].querySelectorAll('tr')].slice(1).map(tr => tr.innerText) : [];
+    const height = tables[1] ? [...tables[1].querySelectorAll('tr')].slice(1).map(tr => tr.innerText) : [];
+
+    const routeElements = [...dom.querySelectorAll('.route__content h3,.route__content p')];
+    const routeInfo = [];
+    let section;
+    for (let routeElement of routeElements) {
+      const { tagName } = routeElement;
+      if (tagName === 'H3') {
+        if (section && section.parts.length > 0) {
+          routeInfo.push(section);
+        }
+        section = {
+          name: routeElement.innerText,
+          parts: []
+        }
+      } else if (tagName === 'P' && section) {
+        section.parts.push(routeElement.innerText);
+      }
+    }
+
     update(path, {
+      loading: false,
       visits: stats.innerText,
       trip,
-      height
+      height,
+      routeInfo
     });
   });
 

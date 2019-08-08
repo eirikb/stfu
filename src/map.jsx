@@ -3,6 +3,7 @@ import 'leaflet.locatecontrol/dist/L.Control.Locate.css';
 import L from 'leaflet';
 import 'leaflet.locatecontrol';
 import iconFiles from '../assets/*.svg';
+import Loading from './loading';
 
 const icons = Object.entries(iconFiles).reduce((res, [key, value]) => {
   res[key] = L.icon({
@@ -21,7 +22,7 @@ const grade = {
   '3': 'black',
 };
 
-export default ({ on, mounted, trigger, set }) => {
+export default ({ on, mounted, trigger, get, set }) => {
   const mapElement = <div id="map" onClick={() => set('route', 'home')}></div>;
   mounted(() => {
     let lastCenter = (localStorage.center || '').split(' ').map(p => parseFloat(p));
@@ -98,17 +99,32 @@ export default ({ on, mounted, trigger, set }) => {
           .addTo(map)
           .on('click', () => trigger('loadMark', path));
 
-        on(`!+* ${path}.loading`, () =>
-          popup.setContent(`<h2>${mark.name}</h2> Laster...`)
-        );
-        on(`!+* ${path}.{length,visits,trip,height}`, () =>
-          popup.setContent(`
-<h2>${mark.name}</h2>
-${mark.visits} <br>
-${mark.trip} <br>
-${mark.height} <br>
-`)
-        );
+        function showMore(e, mark) {
+          e.stopPropagation();
+
+          set('more', mark);
+          set('route', 'more');
+          popup._close();
+        }
+
+        on(`!+* ${path}.{length,visits,trip,height,loading}`, () => {
+          const mark = get(path);
+          if (typeof mark.loading === 'undefined') return;
+
+          if (mark.loading) {
+            popup.setContent(<Loading dd-input-loading={`Laster ${mark.name}`}/>)
+            return;
+          }
+
+          const popupContent = <div>
+            <h2>{mark.name}</h2>
+            {mark.visits}<br/>
+            {(mark.trip || []).map(v => <div>{v}</div>)}
+            {(mark.height || []).map(v => <div>{v}</div>)}
+            <a class="more" onClick={e => showMore(e, mark)}>Vis mer</a>
+          </div>;
+          popup.setContent(popupContent);
+        });
       }
     );
   });
