@@ -21,6 +21,18 @@ map(dd);
 bedrift(dd);
 kode(dd);
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () =>
+    navigator.serviceWorker.register('.//sw.js').then((registration) => {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function (err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    })
+  );
+}
+
 if (!isLocalhost) {
   const appInsights = new ApplicationInsights({
     config: { instrumentationKey: '4c55265c-dadc-4ad5-9334-b615c3c9e36d' }
