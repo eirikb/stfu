@@ -2,12 +2,17 @@ import { query } from './query';
 
 export default ({ on, set }) => {
   on('= initAuth', async () => {
-    const authed = await query('/stikkut/min-side').then(r => !r.url.match(/login/));
-    document.body.removeChild(
-      document.querySelector('#intro')
-    );
-    set('auth', authed);
-    set('route', authed ? 'home' : 'login');
+    try {
+      const authed = await query('/stikkut/min-side?nocache').then(r => !r.url.match(/login/));
+      document.body.removeChild(
+        document.querySelector('#intro')
+      );
+      set('auth', authed);
+      set('route', authed ? 'home' : 'login');
+    } catch (e) {
+      console.log(e);
+      console.log('failed to login');
+    }
   });
 
   on('= login', async e => {
@@ -15,7 +20,7 @@ export default ({ on, set }) => {
     set('loading', 'Logger på');
     set('login.failed', '');
     const data = new URLSearchParams(new FormData(e.target));
-    const authed = await query('/user/login', {
+    const authed = await query('/user/login?nocache', {
       method: 'post',
       body: data
     }).then(r => !r.url.match(/login/));
@@ -33,7 +38,7 @@ export default ({ on, set }) => {
 
     localStorage.clear();
     sessionStorage.clear();
-    await query('/user/logout');
+    await query('/user/logout?nocache');
     window.location.reload();
   });
 };

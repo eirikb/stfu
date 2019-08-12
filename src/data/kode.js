@@ -14,7 +14,7 @@ export default function ({ on, get, set }) {
     set('kode.status', 'Sjekker...');
 
     const kode = e.target.kode.value;
-    const dom = await postForm('/stikkut/min-side', {
+    const dom = await postForm('/stikkut/min-side?nocache', {
       'code[]': kode.split('')
     });
     const companions = [...dom.querySelectorAll('.form__companion')].map(companionDiv => {
@@ -45,7 +45,7 @@ export default function ({ on, get, set }) {
     const kode = get('kode.kode');
     set('kode.status', `Registrerer ${kode}...`);
     const date = new Date().toISOString().split('T')[0];
-    let dom = await postForm('/stikkut/min-side', {
+    let dom = await postForm('/stikkut/min-side?nocache', {
       codeword: kode,
       'members[]': values,
       date
@@ -54,7 +54,7 @@ export default function ({ on, get, set }) {
     if (ok) {
       set('kode.tur', false);
       set('kode.status', 'Koden er registrert! Dobbeltsjekker...');
-      dom = await queryDom('/stikkut/min-side');
+      dom = await queryDom('/stikkut/min-side?nocache');
       const lastTur = dom.querySelector('.regtable__name').innerText;
       set('kode.status', 'Koden er registrert! Siste tur: ' + lastTur);
     } else {

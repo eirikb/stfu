@@ -7,10 +7,7 @@ export function query(path, options = {}) {
 }
 
 export async function queryDom(path, options) {
-  const data = isLocalhost && sessionStorage[path] || await query(path, options).then(r => r.text());
-  if (isLocalhost) {
-    sessionStorage[path] = data;
-  }
+  const data = await query(path, options).then(r => r.text());
   return parser.parseFromString(data, 'text/html');
 }
 

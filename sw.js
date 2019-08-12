@@ -17,6 +17,9 @@ self.addEventListener('fetch', event =>
   event.respondWith(
     caches.match(event.request)
       .then(response => {
+        if (event.request.url.match(/localhost/) || event.request.url.match(/nocache/)) {
+          return fetch(event.request);
+        }
         if (response) {
           return response;
         }
