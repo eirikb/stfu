@@ -9,6 +9,7 @@ export default ({ on, get, set, update }) => {
 
   on('= loadMark', async path => {
     const marker = get(path);
+    set('pos.marker', { lat: marker.lat, lng: marker.lon });
     set(`${path}.loading`, true);
     const { page_id } = marker;
     const [dom, track] = await Promise.all([
