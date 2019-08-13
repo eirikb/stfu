@@ -5,6 +5,7 @@ import user from './data/user';
 import map from './data/map';
 import bedrift from './data/bedrift';
 import kode from './data/kode';
+import online from './data/online';
 import Map from './map.jsx';
 import Login from './login.jsx';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
@@ -13,6 +14,7 @@ import Kode from './kode';
 import Error from './error';
 import Loading from './loading';
 import More from './more';
+import Online from './online';
 import { isLocalhost } from './data/query';
 
 const dd = domdom();
@@ -20,6 +22,7 @@ user(dd);
 map(dd);
 bedrift(dd);
 kode(dd);
+online(dd);
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () =>
@@ -69,6 +72,7 @@ const view = ({ on, when, set, trigger }) => <main>
     ])}
 
   {on('map', () => <Map/>)}
+  <Online/>
 </main>;
 
 dd.append(document.body, view);
