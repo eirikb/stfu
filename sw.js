@@ -1,4 +1,4 @@
-const cacheName = 'stfu-1';
+const cacheName = 'stfu_2';
 
 const urlsToCache = [
   '/',
@@ -13,26 +13,32 @@ self.addEventListener('install', event =>
   )
 );
 
+function fetchAndCache(request) {
+  return fetch(request).then(response => {
+      const responseToCache = response.clone();
+      caches.open(cacheName).then(cache =>
+        cache.put(request, responseToCache)
+      );
+      return response;
+    }
+  );
+}
+
+function mapTilesFromCacheRestFromOnlineOrCacheIfOffline(request) {
+  if (request.url.match(/gatekeeper/i)) {
+    return caches.match(request).then(response => {
+      if (response) {
+        return response;
+      }
+      return fetchAndCache(request);
+    });
+  }
+
+  return fetchAndCache(request).catch(() => caches.match(request));
+}
+
 self.addEventListener('fetch', event =>
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (event.request.url.match(/localhost/) || event.request.url.match(/nocache/)) {
-          return fetch(event.request);
-        }
-        if (response) {
-          return response;
-        }
-
-        return fetch(event.request).then(response => {
-            const responseToCache = response.clone();
-            caches.open(cacheName).then(cache =>
-              cache.put(event.request, responseToCache)
-            );
-
-            return response;
-          }
-        );
-      })
+    mapTilesFromCacheRestFromOnlineOrCacheIfOffline(event.request)
   )
 );
