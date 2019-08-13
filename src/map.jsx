@@ -49,6 +49,11 @@ export default ({ on, mounted, trigger, get, set }) => {
       attribution: 'Kartverket'
     }).addTo(map);
 
+    L.control.scale({
+      position: 'bottomright',
+      imperial: false
+    }).addTo(map);
+
     new (L.Control.extend({
       onAdd: function () {
         function refresh() {
