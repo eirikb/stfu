@@ -40,6 +40,12 @@ export default ({ on, mounted, trigger, get, set }) => {
       localStorage.center = [lat, lng, zoom].join(' ');
     });
 
+    map.on('locationfound', location => {
+      const { lat, lng } = location.latlng;
+      if (!lat || !lng) return;
+      set('pos.gps', { lat, lng });
+    });
+
     L.control.attribution({
       position: 'bottomright',
       prefix: 'Leaflet | Den spanske inkvisisjonen | Stikk UT!'
@@ -75,11 +81,22 @@ export default ({ on, mounted, trigger, get, set }) => {
       position: 'bottomright'
     }).addTo(map);
 
-    map.on('locationfound', location => {
-      const { lat, lng } = location.latlng;
-      if (!lat || !lng) return;
-      set('pos.gps', { lat, lng });
-    });
+    new (L.Control.extend({
+      onAdd: function () {
+        function refresh() {
+          const center = localStorage.center;
+          localStorage.clear();
+          localStorage.center = center;
+          window.location.reload();
+        }
+
+        return <div class="leaflet-control-locate leaflet-bar leaflet-control" onClick={refresh}>
+          <a class="leaflet-bar-part leaflet-bar-part-single">
+            <span class="fa fa-mountain"></span>
+          </a>
+        </div>;
+      }
+    }))({ position: 'bottomright' }).addTo(map);
 
     L.control.locate({
       locateOptions: { enableHighAccuracy: true },

@@ -13,6 +13,10 @@ const app = express();
     changeOrigin: true,
   }))
 );
+app.use('/elevation', proxy({
+  target: 'https://www.norgeskart.no/ws/elev.py',
+  changeOrigin: true,
+}));
 
 const bundler = new Bundler('index.html');
 app.use(bundler.middleware());

@@ -12,4 +12,5 @@ stfu.run {
   proxy /stikkut/ https://www.stikkut.no
   proxy /uploads/ https://www.stikkut.no
   proxy /turar/ https://www.stikkut.no
+  proxy /elevation https://www.norgeskart.no/ws/elev.py
 }
