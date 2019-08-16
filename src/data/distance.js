@@ -13,7 +13,10 @@ export default ({ on, get, set }) => {
   on('!+* pos.{gps,marker}', () => {
     const marker = toLatLng('pos.marker');
     const gps = toLatLng('pos.gps');
-    if (!marker || !gps) return;
+    if (!marker || !gps) {
+      set('pos.distance', false);
+      return;
+    }
     set('pos.distance', marker.distanceTo(gps));
   });
 
@@ -33,7 +36,10 @@ export default ({ on, get, set }) => {
     const track = (get('track') || []).map(([lon, lat]) => new L.LatLng(lat, lon));
     const marker = toLatLng('pos.marker');
     const gps = toLatLng('pos.gps');
-    if (!track || !gps || !marker) return;
+    if (!track || !gps || !marker) {
+      set('pos.trackDistance', false);
+      return;
+    }
 
     const pointClosestToMarker = pointClosestTo(track, marker);
     const pointClosestToGps = pointClosestTo(track, gps);
