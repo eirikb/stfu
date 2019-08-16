@@ -12,7 +12,8 @@
     "@fortawesome/fontawesome-free": "^5.10.1",
     "@microsoft/applicationinsights-web": "^2.1.0",
     "leaflet": "^1.5.1",
-    "leaflet.locatecontrol": "^0.67.0"
+    "leaflet.locatecontrol": "^0.67.0",
+    "proj4": "^2.5.0"
   },
   "devDependencies": {
     "parcel": "^1.12.3",

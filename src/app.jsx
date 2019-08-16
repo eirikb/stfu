@@ -9,6 +9,7 @@ import bedrift from './data/bedrift';
 import kode from './data/kode';
 import online from './data/online';
 import distance from './data/distance';
+import elevation from './data/elevation';
 import { isLocalhost } from './data/query';
 
 import Map from './map';
@@ -28,6 +29,7 @@ bedrift(dd);
 kode(dd);
 online(dd);
 distance(dd);
+elevation(dd);
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () =>

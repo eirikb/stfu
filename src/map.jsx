@@ -23,7 +23,7 @@ const grade = {
 };
 
 export default ({ on, mounted, trigger, get, set }) => {
-  const mapElement = <div id="map" onClick={() => set('route', 'home')}></div>;
+  const mapElement = <div id="map" onClick={() => set('route', 'home')}/>;
   mounted(() => {
     let lastCenter = (localStorage.center || '').split(' ').map(p => parseFloat(p));
     lastCenter = lastCenter.length === 3 ? lastCenter : null;
@@ -71,7 +71,7 @@ export default ({ on, mounted, trigger, get, set }) => {
 
         return <div class="leaflet-control-locate leaflet-bar leaflet-control" onClick={refresh}>
           <a class="leaflet-bar-part leaflet-bar-part-single">
-            <span class="fa fa-refresh"></span>
+            <span class="fa fa-sync"/>
           </a>
         </div>;
       }
@@ -81,29 +81,41 @@ export default ({ on, mounted, trigger, get, set }) => {
       position: 'bottomright'
     }).addTo(map);
 
-    new (L.Control.extend({
-      onAdd: function () {
-        function refresh() {
-          const center = localStorage.center;
-          localStorage.clear();
-          localStorage.center = center;
-          window.location.reload();
-        }
-
-        return <div class="leaflet-control-locate leaflet-bar leaflet-control" onClick={refresh}>
-          <a class="leaflet-bar-part leaflet-bar-part-single">
-            <span class="fa fa-mountain"></span>
-          </a>
-        </div>;
-      }
-    }))({ position: 'bottomright' }).addTo(map);
-
-    L.control.locate({
+    const l = L.control.locate({
       locateOptions: { enableHighAccuracy: true },
       position: 'bottomright',
       flyTo: true,
-      keepCurrentZoomLevel: true
+      keepCurrentZoomLevel: true,
+      showPopup: false
     }).addTo(map);
+    l.stop = () => {
+      l._deactivate();
+      l._cleanClasses();
+      l._resetVariables();
+      l._removeMarker();
+      set('pos.gps', false);
+    };
+
+    on('!+* pos.elevation', elevation => {
+      if (!elevation) return;
+      l._marker.bindPopup(`${elevation.placename}: ${elevation.elevation}m`).openPopup();
+    });
+
+    new (L.Control.extend({
+      onAdd: function () {
+        const e = <div class="leaflet-control-locate leaflet-bar leaflet-control"
+                       onClick={() => trigger('getElevation')}>
+          <a class="leaflet-bar-part leaflet-bar-part-single">
+            <span class="fa fa-mountain"/>
+          </a>
+        </div>;
+        e.hidden = true;
+        on('!+* pos.gps', gps =>
+          e.hidden = !gps
+        );
+        return e;
+      }
+    }))({ position: 'bottomright' }).addTo(map);
 
     let lastTrack;
     on('!+* track', track => {
@@ -140,7 +152,7 @@ export default ({ on, mounted, trigger, get, set }) => {
           if (typeof mark.loading === 'undefined') return;
 
           if (mark.loading) {
-            popup.setContent(<Loading dd-input-loading={`Laster ${mark.name}`}/>)
+            popup.setContent(<Loading dd-input-loading={`Laster ${mark.name}`}/>);
             return;
           }
 
