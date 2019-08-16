@@ -22,18 +22,16 @@ npm start
   - [x] ~~Clientsidelogging (Application Insights)~~
    - [x] ~~Ikke logg noe for localhost~~
    - [x] ~~Feilhåndtering (vise side med feil når noe tryner)~~
-  - [ ] Service worker med masse caching (da også offline)
-    - [ ] Knapp på kartet for å tømme cache
+  - [x] Service worker med masse caching (da også offline)
   - [x] ~~Vise turrute i kartet~~
   - [x] ~~Mer informasjon i infoboblen på kartet~~
     - [x] ~~Antall besøk~~
     - [x] ~~Lengde~~
     - [x] ~~Stigning/Høydemeter~~
-    - [ ] Vise turinfo - egen modal
+    - [x] ~Vise turinfo - egen modal~
   - [x] ~~Menyknapp med:~~
     - [x] ~~Mulighet for å registrere tur (med turfølge, gidder ikke dato)~~
       - [x] ~~Må dobbeltsjekke at tur har blitt registrert~~
-      - [ ] Tømme cache
     - [x] ~~Utlogging (noen som etterspurte dette, hurr)~~
     - [x] ~~Utlisting av topplisten for bedrift (spesielt innad i bedriften)~~
 
