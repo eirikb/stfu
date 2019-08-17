@@ -39,15 +39,16 @@ if ('serviceWorker' in navigator) {
 
 if (!isLocalhost) {
   const appInsights = new ApplicationInsights({
-    config: { instrumentationKey: '4c55265c-dadc-4ad5-9334-b615c3c9e36d' }
+    config: { instrumentationKey: '4c55265c-dadc-4ad5-9334-b615c3c9e36d', disableExceptionTracking: false }
   });
   appInsights.loadAppInsights();
   appInsights.trackPageView({ name: 'home' });
   window.onerror = error => {
     appInsights.trackException({
-      error
+      exception: new window.Error(error)
     });
-    dd.set('error', error);
+    appInsights.flush();
+    dd.set('error', '' + error);
     dd.set('route', 'error');
   };
 }
