@@ -1,6 +1,6 @@
 const parser = new DOMParser();
 
-export const isLocalhost = window.location.host.match(/localhost/);
+export const isLocalhost = !!window.location.host.match(/localhost/);
 
 export function query(path, options = {}) {
   return fetch(path, { credentials: 'include', ...options });
