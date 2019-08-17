@@ -133,7 +133,7 @@ export default ({ on, mounted, trigger, get, set }) => {
         const iconName = mark.done ? `${color}_done` : color;
         const icon = icons[iconName];
 
-        const popup = L.popup({}).setContent('yes');
+        const popup = L.popup({}).setContent();
         L.marker([mark.lat, mark.lon], { icon })
           .bindPopup(popup)
           .addTo(map)

@@ -22,8 +22,8 @@ export default ({ on, get, set }) => {
 
   function pointClosestTo(track, target) {
     return track.reduce((res, point) =>
-      (!res || point.distanceTo(target) < res.distanceTo(target)) ? point : res
-    );
+        (!res || point.distanceTo(target) < res.distanceTo(target)) ? point : res
+      , null);
   }
 
   function trackDistance(track, startPoint) {
