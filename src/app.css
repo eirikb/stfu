@@ -171,3 +171,15 @@ a {
     top: 10px;
     z-index: 1001;
 }
+
+.outlined {
+    color: black;
+    text-shadow: -1px -1px 0 #fff,
+    0 -1px 0 #fff,
+    1px -1px 0 #fff,
+    1px 0 0 #fff,
+    1px 1px 0 #fff,
+    0 1px 0 #fff,
+    -1px 1px 0 #fff,
+    -1px 0 0 #fff;
+}
