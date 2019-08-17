@@ -22,7 +22,7 @@ const grade = {
   '3': 'black',
 };
 
-export default ({ on, mounted, trigger, get, set }) => {
+export default ({ on, mounted, trigger, get, set, when }) => {
   const mapElement = <div id="map" onClick={() => set('route', 'home')}/>;
   mounted(() => {
     let lastCenter = (localStorage.center || '').split(' ').map(p => parseFloat(p));
@@ -106,7 +106,10 @@ export default ({ on, mounted, trigger, get, set }) => {
         const e = <div class="leaflet-control-locate leaflet-bar leaflet-control"
                        onClick={() => trigger('getElevation')}>
           <a class="leaflet-bar-part leaflet-bar-part-single">
-            <span class="fa fa-mountain"/>
+            {when('pos.elevationLoading', [
+              false, <span class="fa fa-mountain"/>,
+              true, <span class="fa fa-spin fa-spinner"/>
+            ])}
           </a>
         </div>;
         e.hidden = true;
