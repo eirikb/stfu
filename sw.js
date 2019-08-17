@@ -16,9 +16,11 @@ self.addEventListener('install', event =>
 function fetchAndCache(request) {
   return fetch(request).then(response => {
       const responseToCache = response.clone();
-      caches.open(cacheName).then(cache =>
-        cache.put(request, responseToCache)
-      );
+      if (request.method === 'GET') {
+        caches.open(cacheName).then(cache =>
+          cache.put(request, responseToCache)
+        );
+      }
       return response;
     }
   );
