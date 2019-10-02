@@ -1,6 +1,6 @@
 # Stikk The F*** UT!
 https://stfu.run  
-![stfu](https://imgur.com/Gjwq4Of)
+![stfu](https://i.imgur.com/Gjwq4Of.png)
 
 ## Features
 
