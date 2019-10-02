@@ -1,5 +1,5 @@
 # Stikk The F*** UT! https://stfu.run  
-![stfu](https://i.imgur.com/Gjwq4Of.png)
+![stfu](https://i.imgur.com/Rp1hdol.png)
 
 ## Features
 
