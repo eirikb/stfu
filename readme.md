@@ -1,9 +1,36 @@
+# Stikk The F*** UT!
+https://stfu.run  
+![stfu](https://imgur.com/Gjwq4Of)
+
+## Features
+
+  - Rask(ere)
+  - Gjennomførte turer er gjennomsiktige
+  - Avstandsmåling til markør
+    - Både luflinje, også kjent som kråkedistanse,
+    - og via sti (hjemmebrygget algoritme, forvent mindre)
+  - Offlinestøtte deluxe
+    - Cacher kart
+    - Cacher rute
+    - Cacher rutetekst
+    - Cacher ruteinfo
+  - Høydemålingsmulighet
+  - Info om tur uten å miste kontekst
+  - Mer info om tur i boble
+  - Husker kartvisning
+  - "Gå til meg takk" beholder samme zoomnivå
+  - Registrering av tur
+  - Toppliste for bedrift
+  
+
+### Utvikling
+
 ```Bash
 npm i
 npm start
 ```
 
-## Plan
+### Plan
 
   - [x] ~~domdom~~
   - [x] ~~Reverse proxy~~
