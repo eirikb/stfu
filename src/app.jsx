@@ -73,6 +73,7 @@ const view = ({ on, when, set, trigger }) => <main>
           <a class="link" onClick={() => set('route', 'bedrift')}>Toppliste Bedrift</a>
           <a class="link" onClick={() => set('route', 'kode')}>Registrer kode</a>
           <a class="link" onClick={() => trigger('logout')}>Logg ut</a>
+          <a className="link" href="https://github.com/eirikb/stfu" target="_blank">Kildekode</a>
           <a class="menu fa fa-3x fa-times" onClick={() => set('route', 'home')}/>
         </div>
       </div>
