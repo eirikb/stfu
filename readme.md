@@ -5,6 +5,7 @@
 
   - Rask(ere)
   - Gjennomførte turer er gjennomsiktige
+  - Fullskjerm (PWA)
   - Avstandsmåling til markør
     - Både luflinje, også kjent som kråkedistanse,
     - og via sti (hjemmebrygget algoritme, forvent mindre)
