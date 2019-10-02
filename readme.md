@@ -1,5 +1,4 @@
-# Stikk The F*** UT!
-https://stfu.run  
+# Stikk The F*** UT! https://stfu.run  
 ![stfu](https://i.imgur.com/Gjwq4Of.png)
 
 ## Features
