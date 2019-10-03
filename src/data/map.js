@@ -23,12 +23,15 @@ export default ({ on, get, set, update }) => {
     const trip = tables[0] ? [...tables[0].querySelectorAll('tr')].slice(1).map(tr => tr.innerText) : [];
     const height = tables[1] ? [...tables[1].querySelectorAll('tr')].slice(1).map(tr => tr.innerText) : [];
 
-    const routeElements = [...dom.querySelectorAll('.route__content h3,.route__content p')];
+    const routeElements = [...dom.querySelectorAll('.route__content > *')];
     const routeInfo = [];
     let section;
     for (let routeElement of routeElements) {
       const { tagName } = routeElement;
-      if (tagName === 'H3') {
+      const isHeader = tagName.startsWith('H');
+      const isScript = tagName === 'SCRIPT';
+      const isProbablyMap = routeElement.className.match(/route__map-wrapper/);
+      if (isHeader) {
         if (section && section.parts.length > 0) {
           routeInfo.push(section);
         }
@@ -36,7 +39,7 @@ export default ({ on, get, set, update }) => {
           name: routeElement.innerText,
           parts: []
         }
-      } else if (tagName === 'P' && section) {
+      } else if (!isHeader && !isScript && !isProbablyMap && section) {
         section.parts.push(routeElement.innerText);
       }
     }
