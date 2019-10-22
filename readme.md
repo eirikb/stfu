@@ -1,4 +1,4 @@
-# Stikk The F*** UT! https://stfu.run  
+# Stikk The F*** UT! https://stfu.run  - En alternativ Stikk UT!-app
 ![stfu](https://i.imgur.com/cwE4Eyv.png)
 
 ## Features
