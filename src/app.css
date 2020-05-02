@@ -231,3 +231,10 @@ a {
     -1px 1px 0 #fff,
     -1px 0 0 #fff;
 }
+.ranking{
+    width:100%;
+    line-height: 200%;
+}
+.ranking th{
+    text-align: left;
+}
