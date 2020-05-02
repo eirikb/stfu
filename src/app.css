@@ -78,6 +78,18 @@ a.link {
     right: 5px;
     min-height: 90%;
     background: white;
+    color:#333;
+    padding: 20px;
+    font-size: 14px;
+}
+.modal h1{
+    font-size:20px;
+}
+.modal h2{
+    font-size:18px;
+}
+.modal h3{
+    font-size:15px;
 }
 
 .modal-close {
@@ -90,29 +102,65 @@ a {
     cursor: pointer;
 }
 
-.kode input {
-    font-size: 24px;
+.kode .enter input {
+    
+    height: 60px;
     text-align: center;
     text-transform: uppercase;
     border: 1px solid;
-    letter-spacing: .1rem;
+    font-size: 24px;
+    width:80%;
+    display: block;
+    box-sizing: border-box;
+    margin: 50px auto 30px auto;
 }
 
-.kode button {
-    background-color: #ec2027;
-    border: 0.1rem solid #ec2027;
+.kode .enter button {
+    
+    height:30px;
+    text-align: center;
+    background-color: #ff4438;
     color: #fff;
     cursor: pointer;
     display: block;
-    font-size: 24px;
-    height: 3.8rem;
-    letter-spacing: .1rem;
-    padding: 0 20px;
+    height: 60px;
+    margin: 0 auto 30px auto;
     text-transform: uppercase;
+    font-size: 24px;
+    width:80%;
+    border:none;
+}
+.kode .kode-status{
+    font-size: 16px;
+    text-align: center;
+}
+.kode .confirm
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.kode .confirm button{
+    height:30px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    height: 60px;
+    text-transform: uppercase;
+    font-size: 24px;
+    border:none;
+    margin: 25px 0;
+}
+.kode .confirm button.cancel{
+    background-color: #ff4438;
+}
+.kode .confirm button.confirm{
+    background-color: #3b764b;
 }
 
 .darn {
-    color: red;
+    color: #ff4438;
 }
 
 .full {
@@ -140,7 +188,7 @@ a {
 
 #intro {
     position: absolute;
-    background-color: #ec2027;
+    background-color: #ff4438;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -160,7 +208,7 @@ a {
     right: 100px;
     top: 45px;
     margin: 0;
-    background-color: red;
+    background-color: #ff4438;
     color: white;
     padding: 10px;
 }
@@ -182,4 +230,11 @@ a {
     0 1px 0 #fff,
     -1px 1px 0 #fff,
     -1px 0 0 #fff;
+}
+.ranking{
+    width:100%;
+    line-height: 200%;
+}
+.ranking th{
+    text-align: left;
 }

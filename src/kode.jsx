@@ -7,7 +7,7 @@ export default function ({ when, text, set, trigger }) {
   }
 
   function RegisterForm({ tur }) {
-    return <form onSubmit={e => trigger('register', e)}>
+    return <form class="confirm" onSubmit={e => trigger('register', e)}>
       <h2>{tur.to}</h2>
       {tur.companions.map((companion, i) =>
         <label>
@@ -15,13 +15,13 @@ export default function ({ when, text, set, trigger }) {
           {companion.text}
         </label>
       )}
-      <button type="button" onClick={() => set('kode.tur', false)}>Avbryt</button>
-      <button type="submit">Registrer kode!</button>
+      <button class="confirm" type="submit">Registrer kode!</button>
+      <button class="cancel" type="button" onClick={() => set('kode.tur', false)}>Avbryt</button>
     </form>;
   }
 
   function CheckForm() {
-    return <form onSubmit={e => trigger('check', e)}>
+    return <form class="enter" onSubmit={e => trigger('check', e)}>
       <input onInput={inputMode}
              name="kode"
              autocapitalize="characters"
@@ -36,11 +36,11 @@ export default function ({ when, text, set, trigger }) {
       <a class="modal-close fa fa-2x fa-times" onClick={() => set('route', 'home')}/>
       <h1>Registrer kode</h1>
 
-      {when('kode.tur', [
-        false, () => <CheckForm/>,
-        tur => !!tur, tur => <RegisterForm dd-input-tur={tur}/>
-      ])}
-      {text('kode.status')}
+        {when('kode.tur', [
+          false, () => <CheckForm/>,
+          tur => !!tur, tur => <RegisterForm dd-input-tur={tur}/>
+        ])}
+        <div class="kode-status">{text('kode.status')}</div>
     </div>
   </div>;
 }
