@@ -15,8 +15,8 @@ export default function ({ when, text, set, trigger }) {
           {companion.text}
         </label>
       )}
-      <button type="button" onClick={() => set('kode.tur', false)}>Avbryt</button>
-      <button type="submit">Registrer kode!</button>
+      <button class="confirm" type="submit">Registrer kode!</button>
+      <button class="cancel" type="button" onClick={() => set('kode.tur', false)}>Avbryt</button>
     </form>;
   }
 

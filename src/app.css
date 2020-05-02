@@ -104,7 +104,7 @@ a {
 
 .kode .enter input {
     
-    height:30px;
+    height: 60px;
     text-align: center;
     text-transform: uppercase;
     border: 1px solid;
@@ -120,19 +120,43 @@ a {
     height:30px;
     text-align: center;
     background-color: #ff4438;
-    border: 0.1rem solid #ff4438;
     color: #fff;
     cursor: pointer;
     display: block;
-    height: 40px;
+    height: 60px;
     margin: 0 auto 30px auto;
     text-transform: uppercase;
     font-size: 24px;
     width:80%;
+    border:none;
 }
 .kode .kode-status{
     font-size: 16px;
     text-align: center;
+}
+.kode .confirm
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.kode .confirm button{
+    height:30px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    height: 60px;
+    text-transform: uppercase;
+    font-size: 24px;
+    border:none;
+    margin: 25px 0;
+}
+.kode .confirm button.cancel{
+    background-color: #ff4438;
+}
+.kode .confirm button.confirm{
+    background-color: #3b764b;
 }
 
 .darn {
