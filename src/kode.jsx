@@ -7,7 +7,7 @@ export default function ({ when, text, set, trigger }) {
   }
 
   function RegisterForm({ tur }) {
-    return <form onSubmit={e => trigger('register', e)}>
+    return <form class="confirm" onSubmit={e => trigger('register', e)}>
       <h2>{tur.to}</h2>
       {tur.companions.map((companion, i) =>
         <label>
@@ -40,7 +40,7 @@ export default function ({ when, text, set, trigger }) {
           false, () => <CheckForm/>,
           tur => !!tur, tur => <RegisterForm dd-input-tur={tur}/>
         ])}
-        {text('kode.status')}
+        <div class="kode-status">{text('kode.status')}</div>
     </div>
   </div>;
 }
