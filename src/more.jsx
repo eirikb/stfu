@@ -4,7 +4,7 @@ export default function ({ get, set }) {
 
     {get('more.routeInfo').map(route =>
       <section>
-        <h3>{route.name}</h3>
+        <h1>{route.name}</h1>
         {route.parts.map(part => <p>{part}</p>)}
       </section>
     )}

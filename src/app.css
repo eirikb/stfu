@@ -78,6 +78,18 @@ a.link {
     right: 5px;
     min-height: 90%;
     background: white;
+    color:#333;
+    padding: 20px;
+    font-size: 14px;
+}
+.modal h1{
+    font-size:20px;
+}
+.modal h2{
+    font-size:18px;
+}
+.modal h3{
+    font-size:15px;
 }
 
 .modal-close {
