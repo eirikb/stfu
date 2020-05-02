@@ -21,7 +21,7 @@ export default function ({ when, text, set, trigger }) {
   }
 
   function CheckForm() {
-    return <form onSubmit={e => trigger('check', e)}>
+    return <form class="enter" onSubmit={e => trigger('check', e)}>
       <input onInput={inputMode}
              name="kode"
              autocapitalize="characters"
@@ -36,11 +36,11 @@ export default function ({ when, text, set, trigger }) {
       <a class="modal-close fa fa-2x fa-times" onClick={() => set('route', 'home')}/>
       <h1>Registrer kode</h1>
 
-      {when('kode.tur', [
-        false, () => <CheckForm/>,
-        tur => !!tur, tur => <RegisterForm dd-input-tur={tur}/>
-      ])}
-      {text('kode.status')}
+        {when('kode.tur', [
+          false, () => <CheckForm/>,
+          tur => !!tur, tur => <RegisterForm dd-input-tur={tur}/>
+        ])}
+        {text('kode.status')}
     </div>
   </div>;
 }

@@ -102,25 +102,34 @@ a {
     cursor: pointer;
 }
 
-.kode input {
-    font-size: 24px;
+.kode .enter input {
+    
+    height:30px;
     text-align: center;
     text-transform: uppercase;
     border: 1px solid;
-    letter-spacing: .1rem;
+    font-size: 24px;
+    width:80%;
+    display: block;
+    box-sizing: border-box;
+    margin: 50px auto 30px auto;
 }
 
-.kode button {
+.kode .enter button {
+    
+    height:30px;
+    text-align: center;
     background-color: #ec2027;
     border: 0.1rem solid #ec2027;
     color: #fff;
     cursor: pointer;
     display: block;
-    font-size: 24px;
-    height: 3.8rem;
-    letter-spacing: .1rem;
-    padding: 0 20px;
+    height: 40px;
+    margin: 0 auto;
     text-transform: uppercase;
+    font-size: 24px;
+    width:80%;
+    
 }
 
 .darn {
