@@ -119,8 +119,8 @@ a {
     
     height:30px;
     text-align: center;
-    background-color: #ec2027;
-    border: 0.1rem solid #ec2027;
+    background-color: #ff4438;
+    border: 0.1rem solid #ff4438;
     color: #fff;
     cursor: pointer;
     display: block;
@@ -136,7 +136,7 @@ a {
 }
 
 .darn {
-    color: red;
+    color: #ff4438;
 }
 
 .full {
@@ -164,7 +164,7 @@ a {
 
 #intro {
     position: absolute;
-    background-color: #ec2027;
+    background-color: #ff4438;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -184,7 +184,7 @@ a {
     right: 100px;
     top: 45px;
     margin: 0;
-    background-color: red;
+    background-color: #ff4438;
     color: white;
     padding: 10px;
 }
