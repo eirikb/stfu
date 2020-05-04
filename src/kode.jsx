@@ -1,4 +1,4 @@
-export default function ({ when, text, set, trigger }) {
+export default function ({ when, on, set, trigger }) {
 
   function inputMode(e) {
     const { target } = e;
@@ -9,7 +9,7 @@ export default function ({ when, text, set, trigger }) {
   function RegisterForm({ tur }) {
     return <form onSubmit={e => trigger('register', e)}>
       <h2>{tur.to}</h2>
-      {tur.companions.map((companion, i) =>
+      {Object.values(tur.companions || {}).map((companion, i) =>
         <label>
           <input value={companion.id} type="checkbox" checked={i === 0} name="companions"/>
           {companion.text}
@@ -40,7 +40,7 @@ export default function ({ when, text, set, trigger }) {
         false, () => <CheckForm/>,
         tur => !!tur, tur => <RegisterForm tur={tur}/>
       ])}
-      {text('kode.status')}
+      {on('kode.status')}
     </div>
   </div>;
 }
