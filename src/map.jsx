@@ -121,11 +121,12 @@ export default ({ on, mounted, trigger, get, set, when }) => {
     }))({ position: 'bottomright' }).addTo(map);
 
     let lastTrack;
-    on('!+* track', track => {
+    on('!+* track', res => {
+      const track = Object.values(res || {});
       if (lastTrack) {
         lastTrack.removeFrom(map);
       }
-      const points = track.map(([lon, lat]) => new L.LatLng(lat, lon));
+      const points = track.map(({ 0: lon, 1: lat }) => new L.LatLng(lat, lon));
       lastTrack = new L.Polyline(points, {
         smoothFactor: 1
       }).addTo(map);
@@ -150,20 +151,20 @@ export default ({ on, mounted, trigger, get, set, when }) => {
           popup._close();
         }
 
-        on(`!+* ${path}.{length,visits,trip,height,loading}`, () => {
+        on(`!+* ${path}.*`, () => {
           const mark = get(path);
           if (typeof mark.loading === 'undefined') return;
 
           if (mark.loading) {
-            popup.setContent(<Loading dd-input-loading={`Laster ${mark.name}`}/>);
+            popup.setContent(<Loading loading={`Laster ${mark.name}`}/>);
             return;
           }
 
           const popupContent = <div>
             <h2>{mark.name}</h2>
             {mark.visits}<br/>
-            {(mark.trip || []).map(v => <div>{v}</div>)}
-            {(mark.height || []).map(v => <div>{v}</div>)}
+            {Object.values(mark.trip || {}).map(v => <div>{v}</div>)}
+            {Object.values(mark.height || {}).map(v => <div>{v}</div>)}
             <a class="more" onClick={e => showMore(e, mark)}>Vis mer</a>
           </div>;
           popup.setContent(popupContent);

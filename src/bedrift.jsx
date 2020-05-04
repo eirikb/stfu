@@ -1,4 +1,4 @@
-export default function ({ when, get, set }) {
+export default function ({ when, on, set }) {
   return <div class="modal">
     <a class="modal-close fa fa-2x fa-times" onClick={() => set('route', 'home')}/>
     <h1>Bedrift - toppliste</h1>
@@ -16,8 +16,8 @@ export default function ({ when, get, set }) {
           </tr>
           </thead>
           <tbody>
-          {(get('bedrift.rows').map(row => <tr>
-              {row.map(cell => <td>{cell}</td>)}
+          {(on('bedrift.rows').map(row => <tr>
+              {Object.values(row).map(cell => <td>{cell}</td>)}
             </tr>
           ))}
           </tbody>

@@ -1,6 +1,6 @@
 import { queryDom, queryJson } from './query';
 
-export default ({ on, get, set, update }) => {
+export default ({ on, get, set, merge }) => {
   on('!+* auth', auth => {
     if (auth) {
       loadMap();
@@ -44,7 +44,7 @@ export default ({ on, get, set, update }) => {
       }
     }
 
-    update(path, {
+    merge(path, {
       loading: false,
       visits: stats.innerText,
       trip,
