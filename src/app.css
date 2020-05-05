@@ -116,7 +116,7 @@ a {
 }
 
 .kode .enter button {
-    
+
     height:30px;
     text-align: center;
     background-color: #ff4438;
@@ -237,4 +237,10 @@ a {
 }
 .ranking th{
     text-align: left;
+}
+
+.new {
+    color: green;
+    font-size: 50px;
+    font-weight: 400;
 }

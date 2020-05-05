@@ -138,10 +138,25 @@ export default ({ on, mounted, trigger, get, set, when }) => {
         const icon = icons[iconName];
 
         const popup = L.popup({}).setContent();
-        L.marker([mark.lat, mark.lon], { icon })
-          .bindPopup(popup)
-          .addTo(map)
-          .on('click', () => trigger('loadMark', path));
+        const isNew = /\(ny\)/i;
+
+        const markers = [];
+        if (mark.name.match(/\(ny\)/i)) {
+          markers.push(
+            L.marker([mark.lat, mark.lon], {
+              icon: L.divIcon({
+                className: 'new',
+                html: '*',
+                iconAnchor: [-10, 80]
+              })
+            })
+          );
+        }
+        markers.push(
+          L.marker([mark.lat, mark.lon], { icon }).bindPopup(popup).on('click', () => trigger('loadMark', path)),
+        );
+
+        L.layerGroup(markers).addTo(map);
 
         function showMore(e, mark) {
           e.stopPropagation();
