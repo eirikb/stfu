@@ -56,7 +56,7 @@ if (!isLocalhost) {
 const view = ({ on, when, set, trigger }) => <main>
   {on('info', info => info)}
   {when('loading', [
-    l => !!l, loading => <Loading dd-input-loading={loading}/>
+    l => !!l, loading => <Loading loading={loading}/>
   ])}
 
   {when('route',

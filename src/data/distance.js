@@ -10,7 +10,7 @@ export default ({ on, get, set }) => {
     return new L.LatLng(lat, lng);
   }
 
-  on('!+* pos.{gps,marker}', () => {
+  on('!+* pos.*', () => {
     const marker = toLatLng('pos.marker');
     const gps = toLatLng('pos.gps');
     if (!marker || !gps) {
@@ -32,8 +32,8 @@ export default ({ on, get, set }) => {
     }, { distance: 0, point: startPoint }).distance;
   }
 
-  function shortesPath() {
-    const track = (get('track') || []).map(([lon, lat]) => new L.LatLng(lat, lon));
+  function shortestPath() {
+    const track = Object.values(get('track') || {}).map(({ 0: lon, 1: lat }) => new L.LatLng(lat, lon));
     const marker = toLatLng('pos.marker');
     const gps = toLatLng('pos.gps');
     if (!track || !gps || !marker) {
@@ -54,6 +54,6 @@ export default ({ on, get, set }) => {
     set('pos.trackDistance', Math.min(leftPath, rightPath));
   }
 
-  on('!+* pos.{gps,marker}', shortesPath);
-  on('!+* track', shortesPath);
+  on('!+* pos.*', shortestPath);
+  on('!+* track', shortestPath);
 };

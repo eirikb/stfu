@@ -1,4 +1,4 @@
-export default function ({ when, text, set, trigger }) {
+export default function ({ when, on, set, trigger }) {
 
   function inputMode(e) {
     const { target } = e;
@@ -9,7 +9,7 @@ export default function ({ when, text, set, trigger }) {
   function RegisterForm({ tur }) {
     return <form class="confirm" onSubmit={e => trigger('register', e)}>
       <h2>{tur.to}</h2>
-      {tur.companions.map((companion, i) =>
+      {Object.values(tur.companions || {}).map((companion, i) =>
         <label>
           <input value={companion.id} type="checkbox" checked={i === 0} name="companions"/>
           {companion.text}
@@ -36,11 +36,11 @@ export default function ({ when, text, set, trigger }) {
       <a class="modal-close fa fa-2x fa-times" onClick={() => set('route', 'home')}/>
       <h1>Registrer kode</h1>
 
-        {when('kode.tur', [
-          false, () => <CheckForm/>,
-          tur => !!tur, tur => <RegisterForm dd-input-tur={tur}/>
-        ])}
-        <div class="kode-status">{text('kode.status')}</div>
+      {when('kode.tur', [
+        false, () => <CheckForm/>,
+        tur => !!tur, tur => <RegisterForm tur={tur}/>
+      ])}
+      {on('kode.status')}
     </div>
   </div>;
 }
