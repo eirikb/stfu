@@ -28,7 +28,8 @@ export default function ({ on, get, set }) {
       set('kode.status', '');
       const tur = {
         to: routeNameElement.innerText,
-        companions
+        companions,
+        members: dom.querySelector(`[name='members[]']`).value
       };
       set('kode.tur', tur);
       set('kode.kode', kode);
@@ -39,15 +40,18 @@ export default function ({ on, get, set }) {
 
   on('= register', async e => {
     e.preventDefault();
-    const values = [...e.target.companions]
+    let members = [...e.target.companions || []]
       .filter(cb => cb.checked)
       .map(cb => cb.value);
+    if (members.length === 0) {
+      members = get('kode.tur.members');
+    }
     const kode = get('kode.kode');
     set('kode.status', `Registrerer ${kode}...`);
     const date = new Date().toISOString().split('T')[0];
     let dom = await postForm('/stikkut/min-side?nocache', {
       codeword: kode,
-      'members[]': values,
+      'members[]': members,
       date
     });
     const ok = ((dom.querySelector('.hero__intro') || {}).innerText || '').match(/Koden er registrert/);
