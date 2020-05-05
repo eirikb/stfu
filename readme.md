@@ -21,7 +21,8 @@
   - "Gå til meg takk" beholder samme zoomnivå
   - Registrering av tur
   - Toppliste for bedrift
-  
+  - Viser i kart hvilke turer som er nye
+  - Viser i kart hvilke turer som ikke har åpnet enda
 
 ### Utvikling
 
@@ -61,5 +62,8 @@ npm start
       - [x] ~~Må dobbeltsjekke at tur har blitt registrert~~
     - [x] ~~Utlogging (noen som etterspurte dette, hurr)~~
     - [x] ~~Utlisting av topplisten for bedrift (spesielt innad i bedriften)~~
+  - [x] ~~Vise i kart hvilke turer som er nye~~
+  - [x] ~~Vise i kart hvilke turer som ikke er åpne enda~~
+  - [ ] "Mine nemesis" - lokal liste over personer man vil konkurrere mot
 
 
