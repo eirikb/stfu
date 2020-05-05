@@ -16,7 +16,7 @@ export default function ({ when, on, set }) {
           </tr>
           </thead>
           <tbody>
-          {(on('bedrift.rows').map(row => <tr>
+          {(on('bedrift.rows.$x', row => <tr>
               {Object.values(row).map(cell => <td>{cell}</td>)}
             </tr>
           ))}
