@@ -200,6 +200,7 @@ export default ({ on, mounted, trigger, get, set, when }) => {
           const popupContent = <div>
             <h2>{mark.name}</h2>
             {mark.visits}<br/>
+            {mark.opening_date ? <div>Åpner: {mark.opening_date}</div> : null}
             {Object.values(mark.trip || {}).map(v => <div>{v}</div>)}
             {Object.values(mark.height || {}).map(v => <div>{v}</div>)}
             <a class="more" onClick={e => showMore(e, mark)}>Vis mer</a>
