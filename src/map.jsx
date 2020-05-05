@@ -138,9 +138,11 @@ export default ({ on, mounted, trigger, get, set, when }) => {
         const icon = icons[iconName];
 
         const popup = L.popup({}).setContent();
-        const isNew = /\(ny\)/i;
 
-        const markers = [];
+        const markers = [
+          L.marker([mark.lat, mark.lon], { icon })
+        ];
+
         if (mark.name.match(/\(ny\)/i)) {
           markers.push(
             L.marker([mark.lat, mark.lon], {
@@ -152,11 +154,31 @@ export default ({ on, mounted, trigger, get, set, when }) => {
             })
           );
         }
-        markers.push(
-          L.marker([mark.lat, mark.lon], { icon }).bindPopup(popup).on('click', () => trigger('loadMark', path)),
-        );
 
-        L.layerGroup(markers).addTo(map);
+        if (mark.opening_date) {
+          const [date, month] = mark.opening_date.split('/');
+          const d = new Date();
+          d.setMonth(month - 1);
+          d.setDate(date);
+          const isClosed = d > new Date();
+          if (isClosed) {
+            markers.push(
+              L.marker([mark.lat, mark.lon], {
+                icon: L.divIcon({
+                  className: 'closed',
+                  html: '!',
+                  iconAnchor: [20, 80]
+                }),
+                bubblingMouseEvents: true
+              })
+            );
+          }
+        }
+
+        L.featureGroup(markers)
+          .bindPopup(popup)
+          .on('click', () => trigger('loadMark', path))
+          .addTo(map)
 
         function showMore(e, mark) {
           e.stopPropagation();
