@@ -88,3 +88,9 @@ const view = ({ on, when, set, trigger }) => <main>
 dd.append(document.body, view);
 
 dd.trigger('initAuth');
+
+document.addEventListener('keydown', e => {
+  if (e.code === 'Escape') {
+    dd.set('route', 'home');
+  }
+});
