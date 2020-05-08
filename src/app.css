@@ -36,6 +36,7 @@ a.menu {
     left: 10px;
     bottom: 20px;
     z-index: 10000;
+    font-size: 60px;
 }
 
 div.menu {
