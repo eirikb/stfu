@@ -33,20 +33,22 @@ npm start
 
 ### Plan
 
+  - [ ] Styling
+    - [ ] Bytte ikoner til noe kulere enn FontAwesome
+    - [ ] Lage litt spinners for lastinger
+  - [ ] Flybilder
+  - [ ] Målelinjal
+  - [ ] Laste segmenter fra Doogal
+  - [ ] "Mine nemesis" - lokal liste over personer man vil konkurrere mot
+  - [ ] Min bedrift: Trykke på person og få opp kart med alle turmål (og tall for antall besøk)
   - [x] ~~domdom~~
   - [x] ~~Reverse proxy~~
   - [x] ~~Custom domene~~
   - [x] ~~Let's Encrypt~~
   - [x] ~~Innlogging / auth~~
-  - [ ] Styling
-    - [ ] Bytte ikoner til noe kulere enn FontAwesome
-    - [ ] Lage litt spinners for lastinger
   - [x] ~~Lasting av kart etter innlogging uten å måtte refreshe siden (sært)~~
-  - [ ] Flybilder
   - [x] ~~Defaultposisjon i kart - plukk fra stikkutbruker - husk i localStorage~~
-  - [ ] Laste segmenter fra Doogal
   - [x] ~~Vise høydemeter for posisjonen~~
-  - [ ] Målelinjal
   - [x] ~~Clientsidelogging (Application Insights)~~
    - [x] ~~Ikke logg noe for localhost~~
    - [x] ~~Feilhåndtering (vise side med feil når noe tryner)~~
@@ -64,6 +66,5 @@ npm start
     - [x] ~~Utlisting av topplisten for bedrift (spesielt innad i bedriften)~~
   - [x] ~~Vise i kart hvilke turer som er nye~~
   - [x] ~~Vise i kart hvilke turer som ikke er åpne enda~~
-  - [ ] "Mine nemesis" - lokal liste over personer man vil konkurrere mot
 
 
