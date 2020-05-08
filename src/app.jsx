@@ -1,5 +1,4 @@
 import '@babel/polyfill';
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import domdom from '@eirikb/domdom';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 
@@ -66,7 +65,7 @@ const view = ({ on, when, set, trigger }) => <main>
       'kode', () => <Kode/>,
       'more', () => <More/>,
       'error', () => <Error/>,
-      'home', () => <a onClick={() => set('route', 'menu')} class="menu fa fa-3x fa-bars"/>,
+      'home', () => <a onClick={() => set('route', 'menu')} class="menu icon">☰</a>,
       'menu', () => <div class="menu">
       <div class="wrapper">
         <div class="content">
@@ -74,7 +73,7 @@ const view = ({ on, when, set, trigger }) => <main>
           <a class="link" onClick={() => set('route', 'kode')}>Registrer kode</a>
           <a class="link" onClick={() => trigger('logout')}>Logg ut</a>
           <a className="link" href="https://github.com/eirikb/stfu" target="_blank">Kildekode</a>
-          <a class="menu fa fa-3x fa-times" onClick={() => set('route', 'home')}/>
+          <a class="menu icon" onClick={() => set('route', 'home')}>✕</a>
         </div>
       </div>
     </div>

@@ -9,7 +9,6 @@
   "license": "MIT",
   "dependencies": {
     "@eirikb/domdom": "^4.5.0",
-    "@fortawesome/fontawesome-free": "^5.10.1",
     "@microsoft/applicationinsights-web": "^2.1.0",
     "leaflet": "^1.5.1",
     "leaflet.locatecontrol": "^0.71.1",

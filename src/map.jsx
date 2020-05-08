@@ -71,7 +71,7 @@ export default ({ on, mounted, trigger, get, set, when }) => {
 
         return <div class="leaflet-control-locate leaflet-bar leaflet-control" onClick={refresh}>
           <a class="leaflet-bar-part leaflet-bar-part-single">
-            <span class="fa fa-sync"/>
+            <span class="icon spin">⟳</span>
           </a>
         </div>;
       }
@@ -106,10 +106,7 @@ export default ({ on, mounted, trigger, get, set, when }) => {
         const e = <div class="leaflet-control-locate leaflet-bar leaflet-control"
                        onClick={() => trigger('getElevation')}>
           <a class="leaflet-bar-part leaflet-bar-part-single">
-            {when('pos.elevationLoading', [
-              false, <span class="fa fa-mountain"/>,
-              true, <span class="fa fa-spin fa-spinner"/>
-            ])}
+            ⛰️
           </a>
         </div>;
         e.hidden = true;

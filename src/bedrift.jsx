@@ -1,6 +1,6 @@
 export default function ({ when, on, set }) {
   return <div class="modal">
-    <a class="modal-close fa fa-2x fa-times" onClick={() => set('route', 'home')}/>
+    <a class="modal-close icon" onClick={() => set('route', 'home')}>✕</a>
     <h1>Toppliste min bedrift</h1>
 
     {when('bedrift.loading', [

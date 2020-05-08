@@ -33,7 +33,7 @@ export default function ({ when, on, set, trigger }) {
 
   return <div class="modal">
     <div class="kode">
-      <a class="modal-close fa fa-2x fa-times" onClick={() => set('route', 'home')}/>
+      <a class="modal-close icon" onClick={() => set('route', 'home')}>✕</a>
       <h1>Registrer kode</h1>
 
       {when('kode.tur', [

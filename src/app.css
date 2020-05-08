@@ -27,10 +27,6 @@ html, body, main, #map {
     line-height: 40px !important;
 }
 
-.leaflet-bar-part span {
-    font-size: 22px !important;
-}
-
 .leaflet-control-zoom-in, .leaflet-control-zoom-out {
     font-size: 28px !important;
 }
@@ -78,18 +74,21 @@ a.link {
     right: 5px;
     min-height: 90%;
     background: white;
-    color:#333;
+    color: #333;
     padding: 20px;
     font-size: 14px;
 }
-.modal h1{
-    font-size:20px;
+
+.modal h1 {
+    font-size: 20px;
 }
-.modal h2{
-    font-size:18px;
+
+.modal h2 {
+    font-size: 18px;
 }
-.modal h3{
-    font-size:15px;
+
+.modal h3 {
+    font-size: 15px;
 }
 
 .modal-close {
@@ -103,13 +102,13 @@ a {
 }
 
 .kode .enter input {
-    
+
     height: 60px;
     text-align: center;
     text-transform: uppercase;
     border: 1px solid;
     font-size: 24px;
-    width:80%;
+    width: 80%;
     display: block;
     box-sizing: border-box;
     margin: 50px auto 30px auto;
@@ -117,7 +116,7 @@ a {
 
 .kode .enter button {
 
-    height:30px;
+    height: 30px;
     text-align: center;
     background-color: #ff4438;
     color: #fff;
@@ -127,21 +126,22 @@ a {
     margin: 0 auto 30px auto;
     text-transform: uppercase;
     font-size: 24px;
-    width:80%;
-    border:none;
+    width: 80%;
+    border: none;
 }
-.kode .kode-status{
+
+.kode .kode-status {
     font-size: 16px;
     text-align: center;
 }
-.kode .confirm
-{
+
+.kode .confirm {
     display: flex;
     flex-direction: column;
 }
 
-.kode .confirm button{
-    height:30px;
+.kode .confirm button {
+    height: 30px;
     text-align: center;
     color: #fff;
     cursor: pointer;
@@ -149,13 +149,15 @@ a {
     height: 60px;
     text-transform: uppercase;
     font-size: 24px;
-    border:none;
+    border: none;
     margin: 25px 0;
 }
-.kode .confirm button.cancel{
+
+.kode .confirm button.cancel {
     background-color: #ff4438;
 }
-.kode .confirm button.confirm{
+
+.kode .confirm button.confirm {
     background-color: #3b764b;
 }
 
@@ -231,11 +233,13 @@ a {
     -1px 1px 0 #fff,
     -1px 0 0 #fff;
 }
-.ranking{
-    width:100%;
+
+.ranking {
+    width: 100%;
     line-height: 200%;
 }
-.ranking th{
+
+.ranking th {
     text-align: left;
 }
 
@@ -249,3 +253,39 @@ a {
     font-size: 35px;
     font-weight: 400;
 }
+
+.icon {
+    font-size: 32px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+/* Hack for leaflet-locatecontrol */
+.fa-map-marker::after {
+    content: '📍'
+}
+
+.fa-spinner::after {
+    content: '⚛'
+}
+
+.fa-spin {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+        transform-origin: center center;
+    }
+    to {
+        transform: rotate(359deg);
+        transform-origin: center center;
+    }
+}
+
