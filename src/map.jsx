@@ -71,7 +71,7 @@ export default ({ on, mounted, trigger, get, set, when }) => {
 
         return <div class="leaflet-control-locate leaflet-bar leaflet-control" onClick={refresh}>
           <a class="leaflet-bar-part leaflet-bar-part-single">
-            <span class="icon spin">⟳</span>
+            <span class="icon">⟳</span>
           </a>
         </div>;
       }
