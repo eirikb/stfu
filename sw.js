@@ -5,6 +5,10 @@ const urlsToCache = [
   'https://opencache.statkart.no/gatekeeper/gk/',
 ];
 
+function responseIsOk(response) {
+  return response.ok && response.status >= 200 && response.status <= 299;
+}
+
 self.addEventListener('install', event =>
   event.waitUntil(
     caches.open(cacheName).then(cache =>
@@ -16,7 +20,7 @@ self.addEventListener('install', event =>
 function fetchAndCache(request) {
   return fetch(request).then(response => {
       const responseToCache = response.clone();
-      if (request.method === 'GET') {
+      if (request.method === 'GET' && responseIsOk(response)) {
         caches.open(cacheName).then(cache =>
           cache.put(request, responseToCache)
         );
@@ -29,7 +33,7 @@ function fetchAndCache(request) {
 function mapTilesFromCacheRestFromOnlineOrCacheIfOffline(request) {
   if (request.url.match(/gatekeeper/i)) {
     return caches.match(request).then(response => {
-      if (response) {
+      if (response && responseIsOk(response)) {
         return response;
       }
       return fetchAndCache(request);
