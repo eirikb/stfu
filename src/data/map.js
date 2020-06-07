@@ -26,21 +26,29 @@ export default ({ on, get, set, merge }) => {
     const routeElements = [...dom.querySelectorAll('.route__content > *')];
     const routeInfo = [];
     let section;
+    let specialText = '';
     for (let routeElement of routeElements) {
       const { tagName } = routeElement;
       const isHeader = tagName.startsWith('H');
       const isScript = tagName === 'SCRIPT';
       const isProbablyMap = routeElement.className.match(/route__map-wrapper/);
+      const text = (routeElement.innerText || '').trim();
       if (isHeader) {
         if (section && section.parts.length > 0) {
           routeInfo.push(section);
         }
         section = {
-          name: routeElement.innerText,
+          name: text,
           parts: []
         }
-      } else if (!isHeader && !isScript && !isProbablyMap && section) {
-        section.parts.push(routeElement.innerText);
+      } else if (!isHeader && !isScript && !isProbablyMap && section && text) {
+        section.parts.push(text);
+      } else if (!section && text) {
+        specialText = text;
+        section = {
+          name: '',
+          parts: [text]
+        }
       }
     }
 
@@ -49,7 +57,8 @@ export default ({ on, get, set, merge }) => {
       visits: stats.innerText,
       trip,
       height,
-      routeInfo
+      routeInfo,
+      specialText
     });
   });
 

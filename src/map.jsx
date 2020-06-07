@@ -200,6 +200,7 @@ export default ({ on, mounted, trigger, get, set, when }) => {
             {mark.opening_date ? <div>Åpner: {mark.opening_date}</div> : null}
             {Object.values(mark.trip || {}).map(v => <div>{v}</div>)}
             {Object.values(mark.height || {}).map(v => <div>{v}</div>)}
+            {mark.specialText ? <i>{mark.specialText}</i> : null}
             <a class="more" onClick={e => showMore(e, mark)}>Vis mer</a>
           </div>;
           popup.setContent(popupContent);
