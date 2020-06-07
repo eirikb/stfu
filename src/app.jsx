@@ -21,37 +21,6 @@ import More from './more';
 import Online from './online';
 import Distance from './distance';
 
-const dd = domdom();
-user(dd);
-map(dd);
-bedrift(dd);
-kode(dd);
-online(dd);
-distance(dd);
-elevation(dd);
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () =>
-    navigator.serviceWorker.register('../sw.js')
-  );
-}
-
-if (!isLocalhost) {
-  const appInsights = new ApplicationInsights({
-    config: { instrumentationKey: '4c55265c-dadc-4ad5-9334-b615c3c9e36d', disableExceptionTracking: false }
-  });
-  appInsights.loadAppInsights();
-  appInsights.trackPageView({ name: 'home' });
-  window.onerror = error => {
-    appInsights.trackException({
-      exception: new window.Error(error)
-    });
-    appInsights.flush();
-    dd.set('error', '' + error);
-    dd.set('route', 'error');
-  };
-}
-
 const view = ({ on, when, set, trigger }) => <main>
   {on('info', info => info)}
   {when('loading', [
@@ -84,7 +53,37 @@ const view = ({ on, when, set, trigger }) => <main>
   <Distance/>
 </main>;
 
-dd.append(document.body, view);
+
+const dd = domdom(document.body, view);
+user(dd);
+map(dd);
+bedrift(dd);
+kode(dd);
+online(dd);
+distance(dd);
+elevation(dd);
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () =>
+    navigator.serviceWorker.register('../sw.js')
+  );
+}
+
+if (!isLocalhost) {
+  const appInsights = new ApplicationInsights({
+    config: { instrumentationKey: '4c55265c-dadc-4ad5-9334-b615c3c9e36d', disableExceptionTracking: false }
+  });
+  appInsights.loadAppInsights();
+  appInsights.trackPageView({ name: 'home' });
+  window.onerror = error => {
+    appInsights.trackException({
+      exception: new window.Error(error)
+    });
+    appInsights.flush();
+    dd.set('error', '' + error);
+    dd.set('route', 'error');
+  };
+}
 
 dd.trigger('initAuth');
 

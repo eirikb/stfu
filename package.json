@@ -8,15 +8,15 @@
   "main": "backend",
   "license": "MIT",
   "dependencies": {
-    "@eirikb/domdom": "^4.5.0",
-    "@microsoft/applicationinsights-web": "^2.1.0",
+    "@eirikb/domdom": "^4.11.8",
+    "@microsoft/applicationinsights-web": "^2.5.5",
     "leaflet": "^1.5.1",
-    "leaflet.locatecontrol": "^0.71.1",
-    "proj4": "^2.5.0"
+    "leaflet.locatecontrol": "^0.72.0",
+    "proj4": "^2.6.2"
   },
   "devDependencies": {
     "express": "^4.17.1",
-    "http-proxy-middleware": "^1.0.3",
+    "http-proxy-middleware": "^1.0.4",
     "parcel": "^1.12.4"
   }
 }
