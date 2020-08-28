@@ -1,11 +1,5 @@
 export default function ({ when, on, set, trigger }) {
 
-  function inputMode(e) {
-    const { target } = e;
-    target.inputMode = target.value.length >= 2 ? 'numeric' : 'text';
-    target.value = target.value.toUpperCase().slice(0, 4);
-  }
-
   function RegisterForm({ tur }) {
     return <form class="confirm" onSubmit={e => trigger('register', e)}>
       <h2>{tur.to}</h2>
@@ -22,8 +16,7 @@ export default function ({ when, on, set, trigger }) {
 
   function CheckForm() {
     return <form class="enter" onSubmit={e => trigger('check', e)}>
-      <input onInput={inputMode}
-             name="kode"
+      <input name="kode"
              autocapitalize="characters"
              pattern="[A-Z][A-Z][0-9][0-9]"
              placeholder="Kode"/>
