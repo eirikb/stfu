@@ -11,8 +11,8 @@ export default function ({ when, on, set }) {
           <tr>
             <th>Nr.</th>
             <th>Navn</th>
-            <th>Turer</th>
             <th>Turmål</th>
+            <th>Turer</th>
           </tr>
           </thead>
           <tbody>
