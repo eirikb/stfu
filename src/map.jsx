@@ -23,6 +23,10 @@ const grade = {
 };
 
 export default ({ on, mounted, trigger, get, set, when }) => {
+  function getColleagueId() {
+    return localStorage.colleague?.substr(localStorage.colleague.indexOf(' '));
+  }
+
   const mapElement = <div id="map" onClick={() => set('route', 'home')}/>;
   mounted(() => {
     let lastCenter = (localStorage.center || '').split(' ').map(p => parseFloat(p));
@@ -46,6 +50,52 @@ export default ({ on, mounted, trigger, get, set, when }) => {
       set('pos.gps', { lat, lng });
     });
 
+    if (localStorage.colleague) {
+      new (L.Control.extend({
+        onAdd: function () {
+          return <div class="leaflet-bar colleague">
+                <b>Viser {getColleagueId()}</b>
+          </div>;
+        }
+      }))({ position: 'topright' }).addTo(map);
+
+      new (L.Control.extend({
+        onAdd: function () {
+          function home() {
+            const center = localStorage.center;
+            localStorage.clear();
+            localStorage.center = center;
+            window.location.reload();
+          }
+
+          return <div class="leaflet-control-locate leaflet-bar leaflet-control" onClick={home}>
+            <a class="leaflet-bar-part leaflet-bar-part-single">
+              <span class="icon">🏠</span>
+            </a>
+          </div>;
+        }
+      }))({ position: 'topright' }).addTo(map);
+    }
+
+    new (L.Control.extend({
+      onAdd: function () {
+        function refresh() {
+          const center = localStorage.center;
+          const colleague = localStorage.colleague;
+          localStorage.clear();
+          localStorage.center = center;
+          localStorage.colleague = colleague;
+          window.location.reload();
+        }
+
+        return <div class="leaflet-control-locate leaflet-bar leaflet-control" onClick={refresh}>
+          <a class="leaflet-bar-part leaflet-bar-part-single">
+            <span class="icon">⟳</span>
+          </a>
+        </div>;
+      }
+    }))({ position: 'bottomright' }).addTo(map);
+
     L.control.attribution({
       position: 'bottomright',
       prefix: 'Leaflet | Den spanske inkvisisjonen | domdom | Stikk UT!'
@@ -64,8 +114,10 @@ export default ({ on, mounted, trigger, get, set, when }) => {
       onAdd: function () {
         function refresh() {
           const center = localStorage.center;
+          const colleague = localStorage.colleague;
           localStorage.clear();
           localStorage.center = center;
+          localStorage.colleague = colleague;
           window.location.reload();
         }
 

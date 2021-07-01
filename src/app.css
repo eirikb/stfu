@@ -2,6 +2,11 @@
     height: 500px;
 }
 
+.colleague {
+    background-color: white;
+    padding: 5px;
+}
+
 html, body, main, #map {
     height: 100%;
     margin: 0;
