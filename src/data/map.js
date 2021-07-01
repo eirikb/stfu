@@ -1,13 +1,13 @@
 import { queryDom, queryJson } from './query';
 
 export default ({ on, get, set, merge }) => {
-  function getColleagueName() {
+  function getColleagueId() {
     return localStorage.colleague?.substr(0, localStorage.colleague.indexOf(' '));
   }
 
   on('!+* auth', auth => {
     if (auth) {
-      loadMap(getColleagueName());
+      loadMap(getColleagueId());
     }
   });
 

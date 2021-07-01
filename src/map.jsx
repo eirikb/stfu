@@ -23,7 +23,7 @@ const grade = {
 };
 
 export default ({ on, mounted, trigger, get, set, when }) => {
-  function getColleagueId() {
+  function getColleagueName() {
     return localStorage.colleague?.substr(localStorage.colleague.indexOf(' '));
   }
 
@@ -54,7 +54,7 @@ export default ({ on, mounted, trigger, get, set, when }) => {
       new (L.Control.extend({
         onAdd: function () {
           return <div class="leaflet-bar colleague">
-                <b>Viser {getColleagueId()}</b>
+                <b>Viser {getColleagueName()}</b>
           </div>;
         }
       }))({ position: 'topright' }).addTo(map);
