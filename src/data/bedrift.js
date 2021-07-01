@@ -14,14 +14,14 @@ export default function ({ on, set }) {
     const query = [...dom.querySelectorAll('table tr.table__entry')];
 
     const rows = query.map(row => {
-      const cells = [...row.querySelectorAll('td')]
-      const links = [...row.querySelectorAll('td.table__name > a')]
+      const cells = [...row.querySelectorAll('td')];
+      const links = [...row.querySelectorAll('td.table__name > a')];
 
       return {
         tds: cells.map(td => td.innerText),
         name: links.map(a => a.innerText)[0],
         id: links.map(a => new URL(a.href).searchParams.get("id"))[0]
-      }
+      };
     });
 
     set('bedrift.rows', rows);

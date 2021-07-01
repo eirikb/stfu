@@ -77,25 +77,6 @@ export default ({ on, mounted, trigger, get, set, when }) => {
       }))({ position: 'topright' }).addTo(map);
     }
 
-    new (L.Control.extend({
-      onAdd: function () {
-        function refresh() {
-          const center = localStorage.center;
-          const colleague = localStorage.colleague;
-          localStorage.clear();
-          localStorage.center = center;
-          localStorage.colleague = colleague;
-          window.location.reload();
-        }
-
-        return <div class="leaflet-control-locate leaflet-bar leaflet-control" onClick={refresh}>
-          <a class="leaflet-bar-part leaflet-bar-part-single">
-            <span class="icon">⟳</span>
-          </a>
-        </div>;
-      }
-    }))({ position: 'bottomright' }).addTo(map);
-
     L.control.attribution({
       position: 'bottomright',
       prefix: 'Leaflet | Den spanske inkvisisjonen | domdom | Stikk UT!'
