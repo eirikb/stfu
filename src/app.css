@@ -255,6 +255,12 @@ a {
     font-weight: 400;
 }
 
+.smallicon {
+    font-size: 18px;
+    font-weight: 600;
+    display: inline-block;
+}
+
 .icon {
     font-size: 32px;
     font-weight: 600;
