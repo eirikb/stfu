@@ -26,6 +26,11 @@ export default ({ on, mounted, trigger, get, set, when }) => {
   function isAerialView() {
     return localStorage.aerial === 'true';
   }
+
+  function getColleagueName() {
+    return localStorage.colleague?.substr(localStorage.colleague.indexOf(' '));
+  }
+
   const mapElement = <div id="map" onClick={() => set('route', 'home')}/>;
   mounted(() => {
     let lastCenter = (localStorage.center || '').split(' ').map(p => parseFloat(p));
@@ -49,6 +54,33 @@ export default ({ on, mounted, trigger, get, set, when }) => {
       if (!lat || !lng) return;
       set('pos.gps', { lat, lng });
     });
+
+    if (localStorage.colleague) {
+      new (L.Control.extend({
+        onAdd: function () {
+          return <div class="leaflet-bar colleague">
+                <b>Viser {getColleagueName()}</b>
+          </div>;
+        }
+      }))({ position: 'topright' }).addTo(map);
+
+      new (L.Control.extend({
+        onAdd: function () {
+          function home() {
+            const center = localStorage.center;
+            localStorage.clear();
+            localStorage.center = center;
+            window.location.reload();
+          }
+
+          return <div class="leaflet-control-locate leaflet-bar leaflet-control" onClick={home}>
+            <a class="leaflet-bar-part leaflet-bar-part-single">
+              <span class="icon">🏠</span>
+            </a>
+          </div>;
+        }
+      }))({ position: 'topright' }).addTo(map);
+    }
 
     L.control.attribution({
       position: 'bottomright',
@@ -106,8 +138,10 @@ export default ({ on, mounted, trigger, get, set, when }) => {
       onAdd: function () {
         function refresh() {
           const center = localStorage.center;
+          const colleague = localStorage.colleague;
           localStorage.clear();
           localStorage.center = center;
+          localStorage.colleague = colleague;
           window.location.reload();
         }
 
