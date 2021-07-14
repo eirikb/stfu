@@ -23,7 +23,7 @@ export default function ({ when, on, set }) {
           </thead>
           <tbody>
           {(on('bedrift.rows.$x', row => <tr>
-              {Object.values(row.tds).map(cell => <td><a class="link" onClick={() => setColleague(row.id, row.name)}>{cell}</a></td>)}
+              {Object.values(row.tds).map(cell => <td><a onClick={() => setColleague(row.id, row.name)}>{cell}</a></td>)}
             </tr>
           ))}
           </tbody>
