@@ -23,6 +23,10 @@ const grade = {
 };
 
 export default ({ on, mounted, trigger, get, set, when }) => {
+  function isAerialView() {
+    return localStorage.aerial === 'true';
+  }
+
   function getColleagueName() {
     return localStorage.colleague?.substr(localStorage.colleague.indexOf(' '));
   }
@@ -33,6 +37,7 @@ export default ({ on, mounted, trigger, get, set, when }) => {
     lastCenter = lastCenter.length === 3 ? lastCenter : null;
     const center = lastCenter ? lastCenter.slice(0, 2) : [62.5, 6.1];
     const zoom = lastCenter ? lastCenter[2] : 10;
+
     const map = L.map(mapElement, {
       zoomControl: false,
       attributionControl: false
@@ -82,14 +87,52 @@ export default ({ on, mounted, trigger, get, set, when }) => {
       prefix: 'Leaflet | Den spanske inkvisisjonen | domdom | Stikk UT!'
     }).addTo(map);
 
-    L.tileLayer('https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={z}&x={x}&y={y}', {
-      attribution: 'Kartverket'
-    }).addTo(map);
-
     L.control.scale({
       position: 'bottomright',
       imperial: false
     }).addTo(map);
+
+    const regularLayer = L.tileLayer('https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={z}&x={x}&y={y}', {
+      attribution: 'Kartverket'
+    })
+
+    const aerialLayer = L.tileLayer.wms('https://wms.geonorge.no/skwms1/wms.nib?', {
+      layers: 'ortofoto',
+      attribution: 'Norge i bilder'
+    });
+
+    if(isAerialView()) {
+      aerialLayer.addTo(map);
+    }
+    else {
+      regularLayer.addTo(map);
+    }
+
+    new (L.Control.extend({
+      onAdd: function () {
+        function toggle() {
+          if(isAerialView()) {
+            map.addLayer(regularLayer);
+            map.removeLayer(aerialLayer);
+            document.getElementById("maptype").innerHTML = '✈️';
+            localStorage.aerial = false;
+          }
+          else {
+            map.addLayer(aerialLayer);
+            map.removeLayer(regularLayer)
+            document.getElementById("maptype").innerHTML = '🗺️';
+            localStorage.aerial = true;
+          }
+        }
+
+        return <div class="leaflet-control-locate leaflet-bar leaflet-control" onClick={toggle}>
+          <a class="leaflet-bar-part leaflet-bar-part-single">
+            <span class="smallicon" id="maptype">{isAerialView() ? '🗺️' : '✈️'}</span>
+          </a>
+        </div>;
+      },
+      on
+    }))({ position: 'bottomright' }).addTo(map);
 
     new (L.Control.extend({
       onAdd: function () {
