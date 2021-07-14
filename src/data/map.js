@@ -1,6 +1,10 @@
 import { queryDom, queryJson } from './query';
 
 export default ({ on, get, set, merge }) => {
+  function getColleagueId() {
+    return localStorage.colleague?.substr(0, localStorage.colleague.indexOf(' '));
+  }
+
   on('!+* auth', auth => {
     if (auth) {
       loadMap();
@@ -69,6 +73,32 @@ export default ({ on, get, set, merge }) => {
     return JSON.parse(mapDataJson);
   }
 
+  async function loadPoints() {
+    const colleague = getColleagueId();
+
+    if(colleague) {
+      return loadSomeonesPoints(colleague);
+    }
+    else {
+      return loadMyPoints();
+    }
+  }
+
+  async function loadSomeonesPoints(colleague) {
+    let dom = await queryDom(`stikkut/stikk-ut-bedrift?tab=colleague&id=${colleague}`);
+    const links = dom.querySelectorAll('.table__secondary-link');
+    let result = [];
+
+    if (links) {
+      result = [...links].map(node => node.href.substring(node.href.lastIndexOf('/')+ 1));
+    }
+
+    return result.reduce((res, done) => {
+      res[done] = true;
+      return res;
+    }, {});
+  }
+
   async function loadMyPoints() {
     let dom = await queryDom('/stikkut/min-side');
     const allLink = dom.querySelector('.regtable__showall');
@@ -87,7 +117,7 @@ export default ({ on, get, set, merge }) => {
 
   async function loadMap() {
     set('loading', 'Laster kart');
-    const [map, dones] = await Promise.all([loadMapPoints(), loadMyPoints()]);
+    const [map, dones] = await Promise.all([loadMapPoints(), loadPoints()]);
     set('map', map.reduce((res, mark) => {
       mark.done = !!dones[mark.page_id];
       res[mark.id] = mark;
