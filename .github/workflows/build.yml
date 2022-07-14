@@ -1,0 +1,13 @@
+name: GitHub Actions Demo
+on:
+  release
+
+jobs:
+  build-and-push-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Docker build and push
+        run: |
+        docker build . --tag ghcr.io/eirikb/stfu:${{ github.event.release.tag_name }}
+        docker push ghcr.io/eirikb/stfu:${{ github.event.release.tag_name }}
