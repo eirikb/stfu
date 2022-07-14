@@ -2,10 +2,9 @@
   "name": "@eirikb/stfu",
   "private": true,
   "scripts": {
-    "start": "node server.js",
+    "start": "node dev.js",
     "build": "parcel build index.html --no-source-maps --public-url ."
   },
-  "main": "backend",
   "license": "MIT",
   "dependencies": {
     "@eirikb/domdom": "^4.11.8",
