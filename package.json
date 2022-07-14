@@ -8,10 +8,9 @@
   "license": "MIT",
   "dependencies": {
     "@eirikb/domdom": "^4.11.8",
-    "@microsoft/applicationinsights-web": "^2.5.5",
-    "leaflet": "^1.5.1",
+    "leaflet": "^1.8.0",
     "leaflet.locatecontrol": "^0.72.0",
-    "proj4": "^2.6.2"
+    "proj4": "^2.8.0"
   },
   "devDependencies": {
     "express": "^4.17.1",
