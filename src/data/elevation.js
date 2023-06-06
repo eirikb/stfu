@@ -13,10 +13,10 @@ export default ({ on, get, set }) => {
         lng,
         lat,
       ]);
-      const elevation = await fetch(
-        `https://ws.geonorge.no/hoydedata/v1/punkt?nord=${lat}&ost=${lng}&koordsys=25833&&geojson=false`
+      const res = await fetch(
+        `https://stfu.run/api/punkt?nord=${lat}&ost=${lng}`
       ).then((r) => r.json());
-      const punkt = elevation.punkter[0];
+      const punkt = res.data.punkter[0];
       if (punkt) {
         set("pos.elevation", {
           placename: punkt.terreng,
