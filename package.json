@@ -2,7 +2,7 @@
   "name": "@eirikb/stfu",
   "private": true,
   "scripts": {
-    "start": "node dev.js",
+    "start": "parcel index.html",
     "build": "parcel build index.html --no-source-maps --public-url ."
   },
   "license": "MIT",

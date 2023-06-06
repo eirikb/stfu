@@ -1,68 +1,82 @@
-import { postForm, queryDom } from './query';
+import { postForm, queryDom } from "./query";
+
+const getAllTurs = async () =>
+  [
+    ...(await queryDom("/api/min-side?nocache")).querySelectorAll(
+      ".regtable:first-of-type .regtable__name"
+    ),
+  ].map((e) => e.innerText.replace(/[\n\t]/g, "").trim());
 
 export default function ({ on, get, set }) {
-
-  set('kode.tur', false);
-  on('+* kode.tur', tur => {
+  set("kode.tur", false);
+  on("+* kode.tur", (tur) => {
     if (tur === false) {
-      set('kode.status', '');
+      set("kode.status", "");
     }
   });
 
-  on('= check', async e => {
+  on("= check", async (e) => {
     e.preventDefault();
-    set('kode.status', 'Sjekker...');
+    set("kode.status", "Sjekker...");
 
     const kode = e.target.kode.value;
-    const dom = await postForm('/stikkut/min-side?nocache', {
-      'code[]': kode.split('')
+    const dom = await postForm("/api/min-side?nocache", {
+      "code[]": kode.split(""),
     });
-    const companions = [...dom.querySelectorAll('.form__companion')].map(companionDiv => {
-      const id = companionDiv.querySelector('input').value;
-      const text = companionDiv.innerText.trim();
-      return { id, text }
-    });
-    const routeNameElement = dom.querySelector('.form__routename');
+    const companions = [...dom.querySelectorAll(".form__companion")].map(
+      (companionDiv) => {
+        const id = companionDiv.querySelector("input").value;
+        const text = companionDiv.innerText.trim();
+        return { id, text };
+      }
+    );
+    const routeNameElement = dom.querySelector(".form__routename");
     const found = !!routeNameElement;
     if (found) {
-      set('kode.status', '');
+      set("kode.status", "");
       const tur = {
         to: routeNameElement.innerText,
         companions,
-        members: dom.querySelector(`[name='members[]']`).value
+        members: dom.querySelector(`[name='members[]']`).value,
       };
-      set('kode.tur', tur);
-      set('kode.kode', kode);
+      set("kode.tur", tur);
+      set("kode.kode", kode);
     } else {
-      set('kode.status', 'Finner ikke tur');
+      set("kode.status", "Finner ikke tur");
     }
   });
 
-  on('= register', async e => {
+  on("= register", async (e) => {
     e.preventDefault();
-    let members = [...e.target.companions || []]
-      .filter(cb => cb.checked)
-      .map(cb => cb.value);
+    let members = [...(e.target.companions || [])]
+      .filter((cb) => cb.checked)
+      .map((cb) => cb.value);
     if (members.length === 0) {
-      members = get('kode.tur.members');
+      members = get("kode.tur.members");
     }
-    const kode = get('kode.kode');
-    set('kode.status', `Registrerer ${kode}...`);
-    const date = new Date().toISOString().split('T')[0];
-    let dom = await postForm('/stikkut/min-side?nocache', {
+    const kode = get("kode.kode");
+    set("kode.status", `Registrerer ${kode}...`);
+    const allTursBefore = await getAllTurs();
+    const date = new Date().toISOString().split("T")[0];
+    let dom = await postForm("/api/min-side?nocache", {
       codeword: kode,
-      'members[]': members,
-      date
+      "members[]": members,
+      date,
     });
-    const ok = ((dom.querySelector('.hero__intro') || {}).innerText || '').match(/Koden er registrert/);
+    const ok = (
+      (dom.querySelector(".hero__intro") || {}).innerText || ""
+    ).match(/Gratulerer/);
     if (ok) {
-      set('kode.tur', false);
-      set('kode.status', 'Koden er registrert! Dobbeltsjekker...');
-      dom = await queryDom('/stikkut/min-side?nocache');
-      const lastTur = dom.querySelector('.regtable__name').innerText;
-      set('kode.status', 'Koden er registrert! Siste tur: ' + lastTur);
+      set("kode.tur", false);
+      set("kode.status", "Koden er registrert! Dobbeltsjekker...");
+
+      const allTursAfter = await getAllTurs();
+      const newTur = allTursAfter
+        .filter((t) => !allTursBefore.includes(t))
+        .join();
+      set("kode.status", "Koden er registrert! Siste tur: " + newTur);
     } else {
-      set('kode.status', 'Noe gikk galt - IKKE registrert');
+      set("kode.status", "Noe gikk galt - IKKE registrert");
     }
   });
 }
