@@ -14,7 +14,7 @@ export default ({ on, get, set }) => {
         lat,
       ]);
       const res = await fetch(
-        `https://stfu.run/api/punkt?nord=${lat}&ost=${lng}`
+        `https://stfu.run/we-api/punkt?nord=${lat}&ost=${lng}`
       ).then((r) => r.json());
       const punkt = res.data.punkter[0];
       if (punkt) {
