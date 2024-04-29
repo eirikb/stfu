@@ -3,8 +3,6 @@ name: stfu
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
 
 jobs:
   build:
@@ -26,4 +24,4 @@ jobs:
       - name: Deploy
         env:
           RAT_SECRET: ${{ secrets.RAT_SECRET }}
-        run: sh gg.cmd ra -v app -t eirikb -a stfu upload -a stfu.run dist
+        run: sh gg.cmd ra -v api -t eirikb upload -a stfu -a stfu.run dist
