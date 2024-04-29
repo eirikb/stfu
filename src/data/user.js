@@ -3,7 +3,7 @@ import { query } from "./query";
 export default ({ on, set }) => {
   on("= initAuth", async () => {
     try {
-      const authed = await query("we-api/min-side?nocache").then(
+      const authed = await query("api/min-side?nocache").then(
         (r) => !r.match(/Logg inn/)
       );
       document.body.removeChild(document.querySelector("#intro"));
@@ -20,7 +20,7 @@ export default ({ on, set }) => {
     set("loading", "Logger på");
     set("login.failed", "");
     const data = new URLSearchParams(new FormData(e.target));
-    const authed = await query("we-api/login?nocache", {
+    const authed = await query("api/login?nocache", {
       method: "post",
       body: data,
     }).then((r) => !r.match(/Logg inn/));
@@ -39,7 +39,7 @@ export default ({ on, set }) => {
 
     localStorage.clear();
     sessionStorage.clear();
-    await query("we-api/logout?nocache");
+    await query("api/logout?nocache");
     window.location.reload();
   });
 };

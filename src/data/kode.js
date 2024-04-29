@@ -2,7 +2,7 @@ import { postForm, queryDom } from "./query";
 
 const getAllTurs = async () =>
   [
-    ...(await queryDom("we-api/min-side?nocache")).querySelectorAll(
+    ...(await queryDom("api/min-side?nocache")).querySelectorAll(
       ".regtable:first-of-type .regtable__name"
     ),
   ].map((e) => e.innerText.replace(/[\n\t]/g, "").trim());
@@ -20,7 +20,7 @@ export default function ({ on, get, set }) {
     set("kode.status", "Sjekker...");
 
     const kode = e.target.kode.value;
-    const dom = await postForm("we-api/min-side?nocache", {
+    const dom = await postForm("api/min-side?nocache", {
       "code[]": kode.split(""),
     });
     const companions = [...dom.querySelectorAll(".form__companion")].map(
@@ -58,7 +58,7 @@ export default function ({ on, get, set }) {
     set("kode.status", `Registrerer ${kode}...`);
     const allTursBefore = await getAllTurs();
     const date = new Date().toISOString().split("T")[0];
-    let dom = await postForm("we-api/min-side?nocache", {
+    let dom = await postForm("api/min-side?nocache", {
       codeword: kode,
       "members[]": members,
       date,
