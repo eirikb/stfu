@@ -20,8 +20,8 @@ export default ({ on, get, set, merge }) => {
     set(`${path}.loading`, true);
     const { page_id } = marker;
     const [dom, track] = await Promise.all([
-      queryDom(`we-api/tur?turId=${page_id}`),
-      queryJson(`we-api/turjson?turId=${page_id}`),
+      queryDom(`api/tur?turId=${page_id}`),
+      queryJson(`api/turjson?turId=${page_id}`),
     ]);
     set("track", track.track);
 
@@ -74,7 +74,7 @@ export default ({ on, get, set, merge }) => {
   });
 
   async function loadMapPoints() {
-    const dom = await queryDom("we-api/turer");
+    const dom = await queryDom("api/turer");
     const mapDataText = dom.querySelector(
       ".routemap__container script"
     ).innerText;
@@ -94,7 +94,7 @@ export default ({ on, get, set, merge }) => {
 
   async function loadSomeonesPoints(colleague) {
     let dom = await queryDom(
-      `we-api/stikk-ut-bedrift?tab=colleague&id=${colleague}`
+      `api/stikk-ut-bedrift?tab=colleague&id=${colleague}`
     );
     const links = dom.querySelectorAll(".table__secondary-link");
     let result = [];
@@ -112,11 +112,11 @@ export default ({ on, get, set, merge }) => {
   }
 
   async function loadMyPoints() {
-    let dom = await queryDom("we-api/min-side");
+    let dom = await queryDom("api/min-side");
     const allLink = dom.querySelector(".regtable__showall");
     if (allLink) {
       const href = allLink.getAttribute("href");
-      dom = await queryDom(`we-api/min-side${href}`);
+      dom = await queryDom(`api/min-side${href}`);
     }
     const dones = [...dom.querySelectorAll("[data-route]")].map(
       (node) => node.dataset.route
