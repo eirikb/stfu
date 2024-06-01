@@ -1,3 +1,13 @@
+# Kroken på døra
+
+En tid er forbi.   
+Stikkutgjengen har valgt å skru av all mulighet for registrering og datauthenting på https://www.stikkut.no/ .  
+Dette betyr at stfu.run ikke lenger kan fungere, uten at vi reverse-engineerer appen. Det er jo mulig, men litt for mye for meg nå, samt de blir nok ikke så veldig glade.  
+Domenet stfu.run er sagt opp.
+
+Etter å ha brukt den nye stikkutappen en stund nå må jeg ærlig innrømme at stfu.run hadde fortsatt et raskere, enklere og mye bedre kart.
+
+
 # Stikk The F*** UT! https://stfu.run  - En alternativ Stikk UT!-app
 ![stfu](https://i.imgur.com/cwE4Eyv.png)
 
